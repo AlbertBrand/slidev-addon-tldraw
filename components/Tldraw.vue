@@ -1,19 +1,15 @@
 <template>
   <div class="absolute">
-    <Tldraw :style="inverseTransformStyle" />
+    <div :style="inverseTransformStyle">
+      <Tldraw persistenceKey="slidev-tldraw" :hideUi="true" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Tldraw as TldrawReact } from 'tldraw'
-import { ref } from 'vue';
-import { createReactWrapper } from 'vue-react-wrapper'
+import { applyReactInVue } from 'veaury'
 import './tldraw.css'
-
-const props = ref({
-  persistenceKey: 'slidev-tldraw',
-  // hideUi: true,
-})
 
 // the slide is CSS transformed at parent level, and Tldraw does not support such transformation
 // so we need to inverse the transformation to make Tldraw work correctly
@@ -26,5 +22,5 @@ const inverseTransformStyle = {
   ` 
 }
 
-const Tldraw = createReactWrapper(TldrawReact, props)
+const Tldraw = applyReactInVue(TldrawReact)
 </script>

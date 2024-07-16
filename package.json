@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "tldraw": "^2.2.1",
-    "vue-react-wrapper": "^0.3.1"
+    "veaury": "^2.4.2"
   }
 }

@@ -6,12 +6,10 @@ layout: center
 
 ---
 
-# slidev-addon-tldraw
+# First slide, show TLDraw
 
 <Tldraw class="w-200 h-3/4"/>
 
-<!-- </div> -->
-
 ---
 
-# Second slide
+# Second slide, end

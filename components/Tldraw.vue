@@ -3,16 +3,25 @@
     <button class="me-4" @click="saveSnapshot">Save Snapshot</button>
     <button @click="loadSnapshot">Load Snapshot</button>
     <div :style="inverseTransformStyle">
-      <Tldraw :hideUi="true" @mount="onMount" />
+      <Tldraw @mount="onMount" :components="components" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Editor, Tldraw as TldrawReact, TLStoreSnapshot } from "tldraw";
-import { shallowRef, watch } from "vue";
+import {
+  Editor,
+  TLComponents,
+  Tldraw as TldrawReact,
+  TLStoreSnapshot,
+} from "tldraw";
+import { computed, shallowRef, useSlots, watch, watchEffect } from "vue";
 import { applyPureReactInVue } from "veaury";
 import snapshot from "./snapshot.json";
+import { useDynamicSlideInfo } from "@slidev/client/composables/useSlideInfo.ts";
+import { DragElementMarkdownSource } from "@slidev/client/composables/useDragElements.ts";
+import { useSlideContext } from "@slidev/client";
+// import yaml from "js-yaml";
 import "./tldraw.css";
 
 // The slide is CSS transformed at parent level, and Tldraw does not support such transformation.
@@ -28,15 +37,34 @@ const inverseTransformStyle = {
 
 const Tldraw = applyPureReactInVue(TldrawReact);
 
+const slots = useSlots();
+const slotText = computed(() => slots.default!()[0].children as string);
+
 const editorRef = shallowRef<Editor>();
 const onMount = (editor: Editor) => {
   if (!editorRef.value) {
-    // ready
-    editor.loadSnapshot(snapshot as TLStoreSnapshot);
+    // ready, load snapshot
+    // TODO make more robust
+    const snapshot = JSON.parse(slotText.value) as TLStoreSnapshot;
+    editor.loadSnapshot(snapshot);
   }
 
   editorRef.value = editor;
 };
+
+const components: TLComponents = {
+  ContextMenu: null,
+  HelpMenu: null,
+  NavigationPanel: null,
+  MainMenu: null,
+  PageMenu: null,
+  DebugPanel: null,
+};
+
+const props = defineProps<{
+  pos?: string;
+  markdownSource?: DragElementMarkdownSource;
+}>();
 
 watch(editorRef, (editor) => {
   if (!editor) return;
@@ -64,12 +92,30 @@ watch(editorRef, (editor) => {
   editor.zoomToBounds(bounds, { force: true });
 });
 
-const saveSnapshot = () => {
+// we can get the content and update the slide
+const context = useSlideContext();
+const { info, update } = useDynamicSlideInfo(context.$page);
+let content: string | undefined;
+watchEffect(() => (content = info.value?.content));
+
+const saveSnapshot = async () => {
   const editor = editorRef.value;
   if (!editor) return;
 
   const { document } = editor.getSnapshot();
-  console.log(JSON.stringify(document));
+  const json = JSON.stringify(document, null, 2);
+  // console.log(yaml.dump(document));
+
+  // update the slide content
+  // TODO allow for more than one Tldraw component?
+  const regex = /(<tldraw[^>]*>)(.*?)(<\/tldraw>)/is;
+  // Replace the content inside the <Tldraw> tags with newContent
+  const newContent = content!.replace(regex, `$1\n${json}\n$3`);
+
+  await update({
+    content: newContent,
+    skipHmr: true,
+  });
 };
 
 const loadSnapshot = () => {

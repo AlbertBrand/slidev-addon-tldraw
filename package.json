@@ -13,11 +13,13 @@
   "author": "Albert Brand <abrand@xebia.com>",
   "license": "MIT",
   "devDependencies": {
+    "@antfu/utils": "^0.7.10",
     "@slidev/cli": "^0.49.16",
     "@slidev/client": "^0.49.16",
     "@slidev/theme-default": "^0.25.0",
     "@slidev/types": "^0.49.16",
     "@types/js-yaml": "^4.0.9",
+    "@vueuse/core": "^10.11.0",
     "vue": "^3.4.29"
   },
   "dependencies": {

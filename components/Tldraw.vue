@@ -1,7 +1,5 @@
 <template>
   <div class="absolute">
-    <button class="me-4" @click="saveSnapshot">Save Snapshot</button>
-    <button @click="loadSnapshot">Load Snapshot</button>
     <div :style="inverseTransformStyle">
       <Tldraw @mount="onMount" :components="components" />
     </div>
@@ -13,11 +11,12 @@ import {
   Editor,
   TLComponents,
   Tldraw as TldrawReact,
+  TLEventMapHandler,
   TLStoreSnapshot,
 } from "tldraw";
 import { computed, shallowRef, useSlots, watch, watchEffect } from "vue";
 import { applyPureReactInVue } from "veaury";
-import snapshot from "./snapshot.json";
+import { debounce } from "@antfu/utils";
 import { useDynamicSlideInfo } from "@slidev/client/composables/useSlideInfo.ts";
 import { DragElementMarkdownSource } from "@slidev/client/composables/useDragElements.ts";
 import { useSlideContext } from "@slidev/client";
@@ -47,6 +46,9 @@ const onMount = (editor: Editor) => {
     // TODO make more robust
     const snapshot = JSON.parse(slotText.value) as TLStoreSnapshot;
     editor.loadSnapshot(snapshot);
+
+    // start listening for changes
+    editor.store.listen(handleChangeEvent, { source: "user", scope: "all" });
   }
 
   editorRef.value = editor;
@@ -98,6 +100,9 @@ const { info, update } = useDynamicSlideInfo(context.$page);
 let content: string | undefined;
 watchEffect(() => (content = info.value?.content));
 
+const handleChangeEvent: TLEventMapHandler<"change"> = (change) =>
+  debouncedSaveSnapshot();
+
 const saveSnapshot = async () => {
   const editor = editorRef.value;
   if (!editor) return;
@@ -118,10 +123,5 @@ const saveSnapshot = async () => {
   });
 };
 
-const loadSnapshot = () => {
-  const editor = editorRef.value;
-  if (!editor) return;
-
-  editor.loadSnapshot(snapshot as TLStoreSnapshot);
-};
+const debouncedSaveSnapshot = debounce(500, saveSnapshot);
 </script>

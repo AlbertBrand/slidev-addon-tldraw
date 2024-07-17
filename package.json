@@ -7,23 +7,22 @@
     "dev": "slidev example.md",
     "build": "slidev build example.md",
     "export": "slidev export example.md",
-    "screenshot": "slidev export example.md --format png"
+    "screenshot": "slidev export example.md --format png",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "Albert Brand <abrand@xebia.com>",
   "license": "MIT",
   "devDependencies": {
-    "@antfu/utils": "^0.7.10",
     "@slidev/cli": "^0.49.16",
     "@slidev/client": "^0.49.16",
     "@slidev/theme-default": "^0.25.0",
     "@slidev/types": "^0.49.16",
-    "@types/js-yaml": "^4.0.9",
     "@vueuse/core": "^10.11.0",
+    "vitest": "^2.0.3",
     "vue": "^3.4.29"
   },
   "dependencies": {
-    "js-yaml": "^4.1.0",
     "tldraw": "^2.2.1",
     "veaury": "^2.4.2"
   }

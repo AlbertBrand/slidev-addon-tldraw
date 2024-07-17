@@ -4,3 +4,17 @@
 body {
   font-family: "Inter";
 }
+
+/* 
+  Slides are CSS transformed at parent level, and Tldraw breaks on such transformations.
+  Inverse the transformation to make Tldraw work correctly. (note that `all: unset` only partially works) 
+*/
+.inverse-transform {
+  width: calc(var(--slidev-slide-scale) * 100%);
+  height: calc(var(--slidev-slide-scale) * 100%);
+  transform: scale(calc(1 / var(--slidev-slide-scale)))
+    translate(
+      calc(calc(var(--slidev-slide-scale) - 1) * -50%),
+      calc(calc(var(--slidev-slide-scale) - 1) * -50%)
+    );
+}

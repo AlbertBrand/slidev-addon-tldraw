@@ -1,8 +1,7 @@
 {
   "name": "slidev-addon-tldraw",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Slidev add to show and edit tldraw diagrams",
   "scripts": {
     "dev": "slidev example.md",
     "build": "slidev build example.md",
@@ -10,7 +9,11 @@
     "screenshot": "slidev export example.md --format png",
     "test": "vitest"
   },
-  "keywords": [],
+  "keywords": [
+    "slidev-addon",
+    "slidev",
+    "tldraw"
+  ],
   "author": "Albert Brand <abrand@xebia.com>",
   "license": "MIT",
   "devDependencies": {
@@ -19,6 +22,7 @@
     "@slidev/theme-default": "^0.25.0",
     "@slidev/types": "^0.49.16",
     "@vueuse/core": "^10.11.0",
+    "playwright-chromium": "^1.45.2",
     "vitest": "^2.0.3",
     "vue": "^3.4.29"
   },

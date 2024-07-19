@@ -82,8 +82,8 @@ const updateZoom = () => {
   editor.setCameraOptions({
     isLocked: false,
   });
-  editor.zoomToBounds(bounds, { force: true, immediate: true });
-  editor.centerOnPoint({ x: 250, y: 250 }, { force: true, immediate: true });
+  editor.zoomToBounds(bounds, { force: true, immediate: true, inset: 0 });
+  editor.centerOnPoint({ x: 300, y: 300 }, { force: true, immediate: true });
   editor.setCameraOptions({
     isLocked: true,
   });

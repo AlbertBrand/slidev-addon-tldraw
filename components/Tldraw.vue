@@ -7,6 +7,7 @@
         :store="store"
         :acceptedImageMimeTypes="acceptedImageMimeTypes"
         :acceptedVideoMimeTypes="acceptedVideoMimeTypes"
+        :hideUi="!isDev"
       />
     </div>
   </div>
@@ -22,11 +23,13 @@ import {
   Tldraw as TldrawReact,
   TLStoreSnapshot,
 } from "tldraw";
-import { computed, ref, shallowRef, useSlots } from "vue";
+import { computed, isReadonly, ref, shallowRef, useSlots } from "vue";
 import { applyPureReactInVue } from "veaury";
 import { useResizeObserver } from "@vueuse/core";
 import { useSaveSnapshot } from "./useSaveSnapshot";
 import "./tldraw.css";
+
+const isDev = __DEV__;
 
 // create Vue component from React component
 const Tldraw = applyPureReactInVue(TldrawReact);
@@ -100,6 +103,9 @@ const onMount = (editor: Editor) => {
     store.listen(debouncedSaveSnapshot, { source: "user", scope: "all" });
   }
   editorRef.value = editor;
+  editorRef.value.updateInstanceState({
+    isReadonly: !isDev,
+  });
 
   // initial zoom to fit
   updateZoom();

@@ -483,8 +483,8 @@ layout: center
       "typeName": "shape"
     },
     "shape:l-5Ve_eYLZdfrwaitUZ5j": {
-      "x": -443.20521349314697,
-      "y": 112.43814654050308,
+      "x": -406.70375489340273,
+      "y": 159.86393028810537,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -512,8 +512,8 @@ layout: center
       "typeName": "shape"
     },
     "shape:--JjHi2GYUAA9uqfLIzVT": {
-      "x": 561.8753194957535,
-      "y": -13.8636572027415,
+      "x": 620.6109333064953,
+      "y": 201.50390244000144,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,

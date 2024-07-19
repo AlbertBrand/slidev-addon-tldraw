@@ -1,6 +1,6 @@
 <template>
   <div class="absolute">
-    <div class="inverse-transform">
+    <div class="inverse-transform" ref="wrapperEl">
       <Tldraw @mount="onMount" :components="components" :store="store" />
     </div>
   </div>
@@ -16,8 +16,9 @@ import {
   Tldraw as TldrawReact,
   TLStoreSnapshot,
 } from "tldraw";
-import { computed, shallowRef, useSlots, watch } from "vue";
+import { computed, ref, shallowRef, useSlots } from "vue";
 import { applyPureReactInVue } from "veaury";
+import { useResizeObserver } from "@vueuse/core";
 import { useSaveSnapshot } from "./useSaveSnapshot";
 import "./tldraw.css";
 
@@ -51,43 +52,45 @@ const components: TLComponents = {
   DebugPanel: null,
 };
 
-// get editor ref
+// create editor ref
 const editorRef = shallowRef<Editor>();
-watch(editorRef, (editor) => {
+
+// zoom to fit bounds
+const updateZoom = () => {
+  const editor = editorRef.value;
   if (!editor) return;
 
-  // const bounds = {
-  //   x: 0,
-  //   y: 0,
-  //   w: 2000,
-  //   h: 2000,
-  // };
+  const bounds = {
+    x: 0,
+    y: 0,
+    w: 600,
+    h: 600,
+  };
 
+  // force doesn't work in tldraw@2.2.1 until next release, so explicitly unlock/lock camera
+  editor.setCameraOptions({
+    isLocked: false,
+  });
+  editor.zoomToBounds(bounds, { force: true, immediate: true });
+  editor.centerOnPoint({ x: 250, y: 250 }, { force: true, immediate: true });
   editor.setCameraOptions({
     isLocked: true,
-
-    // constraints: {
-    //   bounds,
-    //   behavior: "fixed",
-    //   initialZoom: "default",
-    //   baseZoom: "default",
-    //   origin: { x: 0, y: 0 },
-    //   padding: { x: 0, y: 0 },
-    // },
   });
+};
 
-  // editor.setCamera({ x: 0, y: 0 });
-  // editor.zoomToBounds(bounds, { force: true });
-});
+// when component resizes, update zoom
+const wrapperEl = ref(null);
+useResizeObserver(wrapperEl, debounce(updateZoom, 200));
 
 const debouncedSaveSnapshot = debounce(useSaveSnapshot(store), 500);
-
 const onMount = (editor: Editor) => {
   if (!editorRef.value) {
     // listen to changes and save snapshot after debouncing
     store.listen(debouncedSaveSnapshot, { source: "user", scope: "all" });
   }
-
   editorRef.value = editor;
+
+  // initial zoom to fit
+  updateZoom();
 };
 </script>

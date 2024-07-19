@@ -1,10 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap");
 @import url("tldraw/tldraw.css");
 
-body {
-  font-family: "Inter";
-}
-
 /* 
   Slides are CSS transformed at parent level, and Tldraw breaks on such transformations.
   Inverse the transformation to make Tldraw work correctly. (note that `all: unset` only partially works) 

@@ -1,7 +1,13 @@
 <template>
   <div class="absolute">
     <div class="inverse-transform" ref="wrapperEl">
-      <Tldraw @mount="onMount" :components="components" :store="store" />
+      <Tldraw
+        @mount="onMount"
+        :components="components"
+        :store="store"
+        :acceptedImageMimeTypes="acceptedImageMimeTypes"
+        :acceptedVideoMimeTypes="acceptedVideoMimeTypes"
+      />
     </div>
   </div>
 </template>
@@ -41,6 +47,11 @@ try {
 } catch (e) {
   console.error("[slidev-addon-tldraw] Failed to load snapshot", e);
 }
+
+// TODO create custom asset store for binary data (part of tldraw@next)
+// For now, disable big blobs:
+const acceptedImageMimeTypes = ["image/svg+xml"];
+const acceptedVideoMimeTypes = [];
 
 // disable several UI components
 const components: TLComponents = {

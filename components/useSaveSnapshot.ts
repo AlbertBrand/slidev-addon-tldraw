@@ -37,6 +37,7 @@ export function useSaveSnapshot(store: TLStore) {
 
 // Replace slide contents with new json as a child of Tldraw component.
 // Currently only supports a single Tldraw component per slide.
+// TODO: when Slidev support server hooks for addons, store the snapshot in a separate file
 export function replaceContent(content: string, json: string) {
   const openCloseRegex = /(<tldraw[^>]*>)(.*?)(<\/tldraw>)/is;
 

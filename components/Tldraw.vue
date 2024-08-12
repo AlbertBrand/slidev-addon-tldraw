@@ -23,9 +23,10 @@ import {
   Tldraw as TldrawReact,
   TLStoreSnapshot,
 } from "tldraw";
-import { computed, ref, shallowRef, useSlots } from "vue";
+import { computed, ref, shallowRef, useSlots, watchEffect } from "vue";
 import { applyPureReactInVue } from "veaury";
-import { useResizeObserver } from "@vueuse/core";
+import { useCssVar, useResizeObserver } from "@vueuse/core";
+import { useSlideContext } from "@slidev/client";
 import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable.ts";
 import "./tldraw.css";
@@ -86,22 +87,33 @@ const updateZoom = () => {
   editor.zoomToBounds(bounds, { force: true, immediate: true, inset: 0 });
 };
 
-// when component resizes, update zoom
+// update zoom when wrapper resizes
 const wrapperEl = ref(null);
 useResizeObserver(wrapperEl, debounce(updateZoom, 200));
 
+// create css var ref for slide scale
+const scale = useCssVar("--slide-scale", wrapperEl);
+
+const context = useSlideContext();
 const debouncedSaveSnapshot = debounce(useSaveSnapshot(store), 500);
 const onMount = (editor: Editor) => {
   if (!editorRef.value) {
-    // listen to changes and save snapshot after debouncing
+    // listen to all changes and save snapshot after debounce period
     store.listen(debouncedSaveSnapshot, { source: "user", scope: "all" });
   }
   editorRef.value = editor;
+
+  // make readonly when not editable
   editorRef.value.updateInstanceState({
     isReadonly: !isEditable.value,
   });
 
   // initial zoom to fit
   updateZoom();
+
+  // always provide scale to component as CSS variable, even in print mode
+  watchEffect(() => {
+    scale.value = String(context.$scale.value);
+  });
 };
 </script>

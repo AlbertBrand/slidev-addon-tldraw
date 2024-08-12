@@ -51,7 +51,7 @@ try {
   console.error("[slidev-addon-tldraw] Failed to load snapshot", e);
 }
 
-// TODO create custom asset store for binary data (part of tldraw@next)
+// TODO create custom asset store for binary data
 // For now, disable big blobs:
 const acceptedImageMimeTypes = ["image/svg+xml"];
 const acceptedVideoMimeTypes = [];
@@ -74,22 +74,14 @@ const updateZoom = () => {
   const editor = editorRef.value;
   if (!editor) return;
 
+  // square bounds, size makes text still readable
   const bounds = {
     x: 0,
     y: 0,
     w: 600,
     h: 600,
   };
-
-  // force doesn't work in tldraw@2.2.1 until next release, so explicitly unlock/lock camera
-  editor.setCameraOptions({
-    isLocked: false,
-  });
   editor.zoomToBounds(bounds, { force: true, immediate: true, inset: 0 });
-  editor.centerOnPoint({ x: 300, y: 300 }, { force: true, immediate: true });
-  editor.setCameraOptions({
-    isLocked: true,
-  });
 };
 
 // when component resizes, update zoom

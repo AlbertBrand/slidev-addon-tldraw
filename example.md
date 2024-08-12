@@ -45,7 +45,8 @@ layout: center
         "verticalAlign": "middle",
         "growY": 0,
         "fontSizeAdjustment": 22,
-        "url": ""
+        "url": "",
+        "scale": 1
       },
       "typeName": "shape"
     },
@@ -69,7 +70,8 @@ layout: center
         "verticalAlign": "middle",
         "growY": 0,
         "fontSizeAdjustment": 22,
-        "url": ""
+        "url": "",
+        "scale": 1
       },
       "typeName": "shape"
     },
@@ -103,7 +105,8 @@ layout: center
         "arrowheadEnd": "arrow",
         "text": "",
         "labelPosition": 0.5,
-        "font": "draw"
+        "font": "draw",
+        "scale": 1
       },
       "typeName": "shape"
     },
@@ -153,7 +156,8 @@ layout: center
         "align": "middle",
         "verticalAlign": "middle",
         "growY": 0,
-        "url": ""
+        "url": "",
+        "scale": 1
       },
       "parentId": "page:page",
       "index": "a5",
@@ -189,7 +193,8 @@ layout: center
         "arrowheadEnd": "arrow",
         "text": "",
         "labelPosition": 0.5,
-        "font": "draw"
+        "font": "draw",
+        "scale": 1
       },
       "typeName": "shape"
     },
@@ -259,7 +264,8 @@ layout: center
         "arrowheadEnd": "arrow",
         "text": "",
         "labelPosition": 0.5,
-        "font": "draw"
+        "font": "draw",
+        "scale": 1
       },
       "typeName": "shape"
     },
@@ -328,7 +334,9 @@ layout: center
         "assetId": "asset:1713552518",
         "playing": true,
         "url": "",
-        "crop": null
+        "crop": null,
+        "flipX": false,
+        "flipY": false
       },
       "parentId": "page:page",
       "index": "a7",
@@ -385,7 +393,9 @@ layout: center
         "assetId": "asset:1713552518",
         "playing": true,
         "url": "",
-        "crop": null
+        "crop": null,
+        "flipX": false,
+        "flipY": false
       },
       "parentId": "page:page",
       "index": "a8",
@@ -406,19 +416,19 @@ layout: center
       "com.tldraw.pointer": 1,
       "com.tldraw.shape": 4,
       "com.tldraw.asset.bookmark": 2,
-      "com.tldraw.asset.image": 3,
-      "com.tldraw.asset.video": 3,
-      "com.tldraw.shape.arrow": 4,
+      "com.tldraw.asset.image": 5,
+      "com.tldraw.asset.video": 5,
+      "com.tldraw.shape.arrow": 5,
       "com.tldraw.shape.bookmark": 2,
-      "com.tldraw.shape.draw": 1,
+      "com.tldraw.shape.draw": 2,
       "com.tldraw.shape.embed": 4,
       "com.tldraw.shape.frame": 0,
-      "com.tldraw.shape.geo": 8,
+      "com.tldraw.shape.geo": 9,
       "com.tldraw.shape.group": 0,
-      "com.tldraw.shape.highlight": 0,
-      "com.tldraw.shape.image": 3,
-      "com.tldraw.shape.line": 4,
-      "com.tldraw.shape.note": 6,
+      "com.tldraw.shape.highlight": 1,
+      "com.tldraw.shape.image": 4,
+      "com.tldraw.shape.line": 5,
+      "com.tldraw.shape.note": 7,
       "com.tldraw.shape.text": 2,
       "com.tldraw.shape.video": 2,
       "com.tldraw.binding.arrow": 0
@@ -478,7 +488,8 @@ layout: center
         "arrowheadEnd": "arrow",
         "text": "",
         "labelPosition": 0.5,
-        "font": "draw"
+        "font": "draw",
+        "scale": 1
       },
       "typeName": "shape"
     },
@@ -505,7 +516,8 @@ layout: center
         "align": "middle",
         "verticalAlign": "middle",
         "growY": 0,
-        "url": ""
+        "url": "",
+        "scale": 1
       },
       "parentId": "page:page",
       "index": "a3",
@@ -534,7 +546,8 @@ layout: center
         "align": "middle",
         "verticalAlign": "middle",
         "growY": 0,
-        "url": ""
+        "url": "",
+        "scale": 1
       },
       "parentId": "page:page",
       "index": "a4",
@@ -589,19 +602,19 @@ layout: center
       "com.tldraw.pointer": 1,
       "com.tldraw.shape": 4,
       "com.tldraw.asset.bookmark": 2,
-      "com.tldraw.asset.image": 3,
-      "com.tldraw.asset.video": 3,
-      "com.tldraw.shape.arrow": 4,
+      "com.tldraw.asset.image": 5,
+      "com.tldraw.asset.video": 5,
+      "com.tldraw.shape.arrow": 5,
       "com.tldraw.shape.bookmark": 2,
-      "com.tldraw.shape.draw": 1,
+      "com.tldraw.shape.draw": 2,
       "com.tldraw.shape.embed": 4,
       "com.tldraw.shape.frame": 0,
-      "com.tldraw.shape.geo": 8,
+      "com.tldraw.shape.geo": 9,
       "com.tldraw.shape.group": 0,
-      "com.tldraw.shape.highlight": 0,
-      "com.tldraw.shape.image": 3,
-      "com.tldraw.shape.line": 4,
-      "com.tldraw.shape.note": 6,
+      "com.tldraw.shape.highlight": 1,
+      "com.tldraw.shape.image": 4,
+      "com.tldraw.shape.line": 5,
+      "com.tldraw.shape.note": 7,
       "com.tldraw.shape.text": 2,
       "com.tldraw.shape.video": 2,
       "com.tldraw.binding.arrow": 0

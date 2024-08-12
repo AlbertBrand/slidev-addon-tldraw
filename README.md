@@ -2,15 +2,13 @@
 
 Edit your [tldraw](https://tldraw.dev) diagrams directly in [Slidev](https://sli.dev/)
 
-![example](./example-export/2.png)
+![example](./example-assets/tldraw-in-slidev.png)
 
 ## Example
 
 Add a new slide with the following content:
 
 ```md
----
-layout: center
 ---
 
 # New tldraw diagram

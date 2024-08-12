@@ -84,6 +84,17 @@ const updateZoom = () => {
     w: 600,
     h: 600,
   };
+  editor.setCameraOptions({
+    isLocked: true,
+    constraints: {
+      bounds,
+      behavior: "fixed",
+      initialZoom: "default",
+      baseZoom: "default",
+      origin: { x: 0, y: 0 },
+      padding: { x: 0, y: 0 },
+    },
+  });
   editor.zoomToBounds(bounds, { force: true, immediate: true, inset: 0 });
 };
 

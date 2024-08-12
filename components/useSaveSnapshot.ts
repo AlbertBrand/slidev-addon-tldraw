@@ -2,14 +2,13 @@ import {
   getSnapshot,
   TLStore,
 } from "tldraw";
-import { Ref, watchEffect } from "vue";
+import { watchEffect } from "vue";
 import { useSlideContext } from "@slidev/client";
 import { useDynamicSlideInfo } from "@slidev/client/composables/useSlideInfo.ts";
 
 export function useSaveSnapshot(store: TLStore) {
   const context = useSlideContext();
-  // TODO importing @vueuse/core in another component breaks types here (???)
-  const { info, update } = useDynamicSlideInfo(context.$page as Ref<number>);
+  const { info, update } = useDynamicSlideInfo(context.$page);
 
   // get the current slide content
   let content: string | undefined;

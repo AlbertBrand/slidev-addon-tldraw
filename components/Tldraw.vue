@@ -7,7 +7,7 @@
         :store="store"
         :acceptedImageMimeTypes="acceptedImageMimeTypes"
         :acceptedVideoMimeTypes="acceptedVideoMimeTypes"
-        :hideUi="!isDev"
+        :hideUi="!isEditable"
       />
     </div>
   </div>
@@ -23,16 +23,18 @@ import {
   Tldraw as TldrawReact,
   TLStoreSnapshot,
 } from "tldraw";
-import { computed, isReadonly, ref, shallowRef, useSlots } from "vue";
+import { computed, ref, shallowRef, useSlots } from "vue";
 import { applyPureReactInVue } from "veaury";
 import { useResizeObserver } from "@vueuse/core";
 import { useSaveSnapshot } from "./useSaveSnapshot";
+import { useIsEditable } from "./useIsEditable.ts";
 import "./tldraw.css";
-
-const isDev = __DEV__;
 
 // create Vue component from React component
 const Tldraw = applyPureReactInVue(TldrawReact);
+
+// get editable state from dev mode and slide view
+const isEditable = useIsEditable();
 
 // get snapshot from default slot
 const slots = useSlots();
@@ -96,7 +98,7 @@ const onMount = (editor: Editor) => {
   }
   editorRef.value = editor;
   editorRef.value.updateInstanceState({
-    isReadonly: !isDev,
+    isReadonly: !isEditable.value,
   });
 
   // initial zoom to fit

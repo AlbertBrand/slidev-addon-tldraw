@@ -620,5 +620,3 @@ layout: center
 # Third slide
 
 Yup.
-
----

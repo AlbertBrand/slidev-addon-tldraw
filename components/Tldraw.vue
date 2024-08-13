@@ -28,7 +28,7 @@ import { applyPureReactInVue } from "veaury";
 import { useCssVar, useResizeObserver } from "@vueuse/core";
 import { useSlideContext } from "@slidev/client";
 import { useSaveSnapshot } from "./useSaveSnapshot";
-import { useIsEditable } from "./useIsEditable.ts";
+import { useIsEditable } from "./useIsEditable";
 import "./tldraw.css";
 
 // create Vue component from React component

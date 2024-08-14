@@ -15,7 +15,8 @@
     "tldraw"
   ],
   "files": [
-    "components"
+    "components",
+    "vite.config.ts"
   ],
   "repository": {
     "type": "git",

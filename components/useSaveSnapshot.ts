@@ -23,9 +23,12 @@ export function useSaveSnapshot(store: TLStore, props: Props) {
     const { document } = getSnapshot(store);
     const json = JSON.stringify(document, null, 2);
 
+    // send the snapshot as a data URL
+    const dataURL = "data:text/plain;base64," + btoa(json);
+
     // store the snapshot on disk via the vite plugin
     if (import.meta.hot) {
-      import.meta.hot.send("tldraw:store-file", { path: props.doc, content: json });
+      import.meta.hot.send("tldraw:store-file", { path: props.doc, content: dataURL });
     }
 
     // update the slide content to include the doc prop

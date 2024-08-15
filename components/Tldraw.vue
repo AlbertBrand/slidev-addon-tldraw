@@ -5,8 +5,6 @@
         @mount="onMount"
         :components="components"
         :store="store"
-        :acceptedImageMimeTypes="acceptedImageMimeTypes"
-        :acceptedVideoMimeTypes="acceptedVideoMimeTypes"
         :hideUi="!isEditable"
       />
     </div>
@@ -19,6 +17,7 @@ import {
   debounce,
   Editor,
   loadSnapshot,
+  TLAssetStore,
   TLComponents,
   Tldraw as TldrawReact,
   uniqueId,
@@ -29,6 +28,7 @@ import { useCssVar, useResizeObserver } from "@vueuse/core";
 import { useSlideContext } from "@slidev/client";
 import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable";
+import { encodeFileToDataURL } from "./encodeFileToDataURL.ts";
 import "./tldraw.css";
 
 export type Props = {
@@ -47,8 +47,32 @@ let docPath = props.doc;
 
 const createUniqueDocPath = () => "tldraw/doc-" + uniqueId() + ".json";
 
-// create store and load initial snapshot from doc path (if set)
-const store = createTLStore();
+// create asset store
+const assets: TLAssetStore = {
+  async upload(_, file) {
+    const objectName = `${uniqueId()}-${file.name}`;
+    const imagePath = `tldraw/images/${encodeURIComponent(objectName)}`;
+    const encodedFile = await encodeFileToDataURL(file);
+
+    // store the asset on disk via the vite plugin
+    if (import.meta.hot) {
+      import.meta.hot.send("tldraw:store-file", {
+        path: imagePath,
+        content: encodedFile,
+      });
+    }
+
+    return "/" + imagePath;
+  },
+
+  resolve(asset) {
+    return asset.props.src;
+  },
+};
+
+// create store
+const store = createTLStore({ assets });
+
 const fetchSnapshot = async (doc: string) => {
   const res = await fetch("/" + doc);
   const snapshot = await res.json();
@@ -58,6 +82,7 @@ const fetchSnapshot = async (doc: string) => {
   updateZoom();
 };
 
+// load initial snapshot from doc path (if set)
 if (docPath) {
   try {
     fetchSnapshot(docPath);
@@ -69,11 +94,6 @@ if (docPath) {
 } else {
   docPath = createUniqueDocPath();
 }
-
-// TODO create custom asset store for binary data
-// For now, disable big blobs:
-const acceptedImageMimeTypes = ["image/svg+xml"];
-const acceptedVideoMimeTypes = [];
 
 // disable several UI components
 const components: TLComponents = {

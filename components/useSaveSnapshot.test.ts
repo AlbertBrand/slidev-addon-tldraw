@@ -1,28 +1,40 @@
 import { vi, expect, test } from 'vitest'
-import { replaceContent } from './useSaveSnapshot'
+import { updateTldrawProps, updateAttrs } from './useSaveSnapshot'
 
 vi.mock('@slidev/client/composables/useSlideInfo.ts', () => ({}))
 vi.mock('@slidev/client', () => ({}))
 
-test('replace open tag', () => {
+test('update props on open tag', () => {
   const content = '# First slide, show TLDraw\n\n<Tldraw class="w-216 h-5/8">\n</Tldraw>'
-  expect(replaceContent(content, '{}')).toMatchInlineSnapshot(`
+  expect(updateTldrawProps(content, { doc: 'doc-123' })).toMatchInlineSnapshot(`
     "# First slide, show TLDraw
 
-    <Tldraw class="w-216 h-5/8">
-    {}
-    </Tldraw>"
+    <tldraw class="w-216 h-5/8" doc="doc-123">
+    </tldraw>"
   `);
 })
 
-test('replace selfclosed tag', () => {
+test('update props on selfclosed tag', () => {
   const content = '# First slide, show TLDraw\n\n<Tldraw class="w-216 h-5/8"/>'
-  expect(replaceContent(content, '{}')).toMatchInlineSnapshot(`
+  expect(updateTldrawProps(content, { doc: 'doc-123' })).toMatchInlineSnapshot(`
     "# First slide, show TLDraw
 
-    <Tldraw class="w-216 h-5/8">
-    {}
-    </Tldraw>"
+    <tldraw class="w-216 h-5/8" doc="doc-123"></tldraw>"
   `);
 })
 
+
+test('updateAttrs selfclosed', () => {
+  const result = updateAttrs('<Tldraw />', { doc: 'doc-123' })
+  expect(result).toBe('<tldraw doc="doc-123"></tldraw>')
+})
+
+test('updateAttrs sets', () => {
+  const result = updateAttrs('<tldraw></tldraw>', { doc: 'doc-123' })
+  expect(result).toBe('<tldraw doc="doc-123"></tldraw>')
+})
+
+test('updateAttrs overwrites', () => {
+  const result = updateAttrs('<tldraw doc="existing"></tldraw>', { doc: 'doc-123' })
+  expect(result).toBe('<tldraw doc="doc-123"></tldraw>')
+})

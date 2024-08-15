@@ -21,9 +21,9 @@ import {
   loadSnapshot,
   TLComponents,
   Tldraw as TldrawReact,
-  TLStoreSnapshot,
+  uniqueId,
 } from "tldraw";
-import { computed, ref, shallowRef, useSlots, watchEffect } from "vue";
+import { ref, shallowRef, watchEffect } from "vue";
 import { applyPureReactInVue } from "veaury";
 import { useCssVar, useResizeObserver } from "@vueuse/core";
 import { useSlideContext } from "@slidev/client";
@@ -31,27 +31,43 @@ import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable";
 import "./tldraw.css";
 
+export type Props = {
+  doc: string;
+};
+
 // create Vue component from React component
 const Tldraw = applyPureReactInVue(TldrawReact);
 
 // get editable state from dev mode and slide view
 const isEditable = useIsEditable();
 
-// get snapshot from default slot
-const slots = useSlots();
-const slotText = computed(
-  () => slots.default && (slots.default()[0].children as string)
-);
+// props for this component
+const props = defineProps<Partial<Props>>();
+let docPath = props.doc;
 
-// create store and load snapshot
+const createUniqueDocPath = () => "tldraw/doc-" + uniqueId() + ".json";
+
+// create store and load initial snapshot from doc path (if set)
 const store = createTLStore();
-try {
-  if (slotText.value !== undefined) {
-    const snapshot = JSON.parse(slotText.value) as TLStoreSnapshot;
-    loadSnapshot(store, snapshot);
+const fetchSnapshot = async (doc: string) => {
+  const res = await fetch("/" + doc);
+  const snapshot = await res.json();
+  loadSnapshot(store, snapshot);
+
+  // zoom to fit after snapshot is loaded
+  updateZoom();
+};
+
+if (docPath) {
+  try {
+    fetchSnapshot(docPath);
+  } catch (e) {
+    console.error("[slidev-addon-tldraw] Failed to load snapshot", e);
+    // fallback to new doc, else the failed document is overwritten later
+    docPath = createUniqueDocPath();
   }
-} catch (e) {
-  console.error("[slidev-addon-tldraw] Failed to load snapshot", e);
+} else {
+  docPath = createUniqueDocPath();
 }
 
 // TODO create custom asset store for binary data
@@ -81,14 +97,14 @@ const updateZoom = () => {
   const bounds = {
     x: 0,
     y: 0,
-    w: 600,
-    h: 600,
+    w: 800,
+    h: 800,
   };
   editor.setCameraOptions({
     isLocked: true,
     constraints: {
       bounds,
-      behavior: "fixed",
+      behavior: "inside",
       initialZoom: "default",
       baseZoom: "default",
       origin: { x: 0, y: 0 },
@@ -106,7 +122,10 @@ useResizeObserver(wrapperEl, debounce(updateZoom, 200));
 const scale = useCssVar("--slide-scale", wrapperEl);
 
 const context = useSlideContext();
-const debouncedSaveSnapshot = debounce(useSaveSnapshot(store), 500);
+const debouncedSaveSnapshot = debounce(
+  useSaveSnapshot(store, { doc: docPath }),
+  500
+);
 const onMount = (editor: Editor) => {
   if (!editorRef.value) {
     // listen to all changes and save snapshot after debounce period

@@ -5,8 +5,9 @@ import {
 import { watchEffect } from "vue";
 import { useSlideContext } from "@slidev/client";
 import { useDynamicSlideInfo } from "@slidev/client/composables/useSlideInfo.ts";
+import { Props } from "./Tldraw.vue";
 
-export function useSaveSnapshot(store: TLStore) {
+export function useSaveSnapshot(store: TLStore, props: Props) {
   const context = useSlideContext();
   const { info, update } = useDynamicSlideInfo(context.$page);
 
@@ -18,13 +19,19 @@ export function useSaveSnapshot(store: TLStore) {
   return async () => {
     if (content === undefined) return;
 
+    // get a snapshot of the current document
     const { document } = getSnapshot(store);
     const json = JSON.stringify(document, null, 2);
-    // const yml = yaml.dump(document);
 
-    // update the slide content
-    const newContent = replaceContent(content, json);
+    // store the snapshot on disk via the vite plugin
+    if (import.meta.hot) {
+      import.meta.hot.send("tldraw:store-file", { path: props.doc, content: json });
+    }
 
+    // update the slide content to include the doc prop
+    const newContent = updateTldrawProps(content, props);
+
+    // skip update if content is same
     if (content === newContent) return;
 
     await update({
@@ -34,20 +41,25 @@ export function useSaveSnapshot(store: TLStore) {
   };
 }
 
-// Replace slide contents with new json as a child of Tldraw component.
+// Replace slide contents with new props on Tldraw component.
 // Currently only supports a single Tldraw component per slide.
-// TODO: when Slidev support server hooks for addons, store the snapshot in a separate file
-export function replaceContent(content: string, json: string) {
-  const openCloseRegex = /(<tldraw[^>]*>)(.*?)(<\/tldraw>)/is;
+export function updateTldrawProps(content: string, props: Props) {
+  const openCloseRegex = /<tldraw[^>]*>.*<\/tldraw>/is;
 
   if (openCloseRegex.test(content)) {
-    return content.replace(openCloseRegex, `$1\n${json}\n$3`);
+    return content.replace(openCloseRegex, (match) => updateAttrs(match, props));
   }
 
-  const selfCloseRegex = /<(tldraw)(.*)(\/>)/is;
+  const selfCloseRegex = /<tldraw.*\/>/is;
   if (selfCloseRegex.test(content)) {
-    return content.replace(selfCloseRegex, `<$1$2>\n${json}\n</$1>`);
+    return content.replace(selfCloseRegex, (match) => updateAttrs(match, props));
   }
 
   return content;
+}
+
+export function updateAttrs(component: string, props: Props) {
+  const doc = new DOMParser().parseFromString(component, 'text/html');
+  doc.body.firstElementChild?.setAttribute('doc', props.doc);
+  return doc.body.innerHTML;
 }

@@ -13,26 +13,28 @@
 
 <script setup lang="ts">
 import {
-  createTLStore,
   debounce,
   Editor,
   loadSnapshot,
-  TLAssetStore,
   TLComponents,
   Tldraw as TldrawReact,
   uniqueId,
 } from "tldraw";
-import { ref, shallowRef, watchEffect } from "vue";
+import { reactive, ref, shallowRef, watchEffect } from "vue";
 import { applyPureReactInVue } from "veaury";
 import { useCssVar, useResizeObserver } from "@vueuse/core";
 import { useSlideContext } from "@slidev/client";
 import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable";
-import { encodeFileToDataURL } from "./encodeFileToDataURL.ts";
+import { useStore } from "./useStore.ts";
 import "./tldraw.css";
 
-export type Props = {
+type Props = {
   doc: string;
+};
+
+export type State = {
+  doc?: string;
 };
 
 // create Vue component from React component
@@ -43,35 +45,16 @@ const isEditable = useIsEditable();
 
 // props for this component
 const props = defineProps<Partial<Props>>();
-let docPath = props.doc;
 
 const createUniqueDocPath = () => "tldraw/doc-" + uniqueId() + ".json";
 
-// create asset store
-const assets: TLAssetStore = {
-  async upload(_, file) {
-    const objectName = `${uniqueId()}-${file.name}`;
-    const imagePath = `tldraw/images/${encodeURIComponent(objectName)}`;
-    const encodedFile = await encodeFileToDataURL(file);
-
-    // store the asset on disk via the vite plugin
-    if (import.meta.hot) {
-      import.meta.hot.send("tldraw:store-file", {
-        path: imagePath,
-        content: encodedFile,
-      });
-    }
-
-    return "/" + imagePath;
-  },
-
-  resolve(asset) {
-    return asset.props.src;
-  },
-};
+// internal state
+const state = reactive<State>({
+  doc: props.doc,
+});
 
 // create store
-const store = createTLStore({ assets });
+const store = useStore();
 
 const fetchSnapshot = async (doc: string) => {
   const res = await fetch("/" + doc);
@@ -83,16 +66,15 @@ const fetchSnapshot = async (doc: string) => {
 };
 
 // load initial snapshot from doc path (if set)
-if (docPath) {
-  try {
-    fetchSnapshot(docPath);
-  } catch (e) {
+if (props.doc) {
+  // TODO wait on fetch
+  fetchSnapshot(props.doc).catch((e) => {
     console.error("[slidev-addon-tldraw] Failed to load snapshot", e);
     // fallback to new doc, else the failed document is overwritten later
-    docPath = createUniqueDocPath();
-  }
+    state.doc = createUniqueDocPath();
+  });
 } else {
-  docPath = createUniqueDocPath();
+  state.doc = createUniqueDocPath();
 }
 
 // disable several UI components
@@ -142,10 +124,7 @@ useResizeObserver(wrapperEl, debounce(updateZoom, 200));
 const scale = useCssVar("--slide-scale", wrapperEl);
 
 const context = useSlideContext();
-const debouncedSaveSnapshot = debounce(
-  useSaveSnapshot(store, { doc: docPath }),
-  500
-);
+const debouncedSaveSnapshot = debounce(useSaveSnapshot(store, state), 500);
 const onMount = (editor: Editor) => {
   if (!editorRef.value) {
     // listen to all changes and save snapshot after debounce period

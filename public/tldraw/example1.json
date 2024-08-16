@@ -63,8 +63,8 @@
       "typeName": "shape"
     },
     "shape:Y_iq5GJenFdWBOLRCMdYp": {
-      "x": 157.76316936459068,
-      "y": 396.0874546241974,
+      "x": 101.27733134263872,
+      "y": 458.6865396578984,
       "rotation": 6.213372137099813,
       "isLocked": false,
       "opacity": 1,
@@ -378,6 +378,44 @@
       },
       "parentId": "page:page",
       "index": "aC",
+      "typeName": "shape"
+    },
+    "asset:-1842179584": {
+      "meta": {},
+      "id": "asset:-1842179584",
+      "type": "image",
+      "typeName": "asset",
+      "props": {
+        "name": "SparseConfetti.svg",
+        "src": "/tldraw/assets/ySUCTtXYhzFfCLGpA1Orz-SparseConfetti.svg",
+        "w": 2667,
+        "h": 2667,
+        "fileSize": 53483,
+        "mimeType": "image/svg+xml",
+        "isAnimated": false
+      }
+    },
+    "shape:-f2zxkAoQiJnluPe27dKF": {
+      "x": 146.75542354540744,
+      "y": 39.10464268091212,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:-f2zxkAoQiJnluPe27dKF",
+      "type": "image",
+      "props": {
+        "w": 400.8686147046836,
+        "h": 400.8686147046836,
+        "assetId": "asset:-1842179584",
+        "playing": true,
+        "url": "",
+        "crop": null,
+        "flipX": false,
+        "flipY": false
+      },
+      "parentId": "page:page",
+      "index": "aD",
       "typeName": "shape"
     }
   },

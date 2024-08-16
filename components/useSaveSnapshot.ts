@@ -5,9 +5,9 @@ import {
 import { watchEffect } from "vue";
 import { useSlideContext } from "@slidev/client";
 import { useDynamicSlideInfo } from "@slidev/client/composables/useSlideInfo.ts";
-import { Props } from "./Tldraw.vue";
+import { State } from "./Tldraw.vue";
 
-export function useSaveSnapshot(store: TLStore, props: Props) {
+export function useSaveSnapshot(store: TLStore, state: State) {
   const context = useSlideContext();
   const { info, update } = useDynamicSlideInfo(context.$page);
 
@@ -28,11 +28,11 @@ export function useSaveSnapshot(store: TLStore, props: Props) {
 
     // store the snapshot on disk via the vite plugin
     if (import.meta.hot) {
-      import.meta.hot.send("tldraw:store-file", { path: props.doc, content: dataURL });
+      import.meta.hot.send("tldraw:store-file", { path: state.doc, content: dataURL });
     }
 
     // update the slide content to include the doc prop
-    const newContent = updateTldrawProps(content, props);
+    const newContent = updateTldrawProps(content, state);
 
     // skip update if content is same
     if (content === newContent) return;
@@ -46,23 +46,23 @@ export function useSaveSnapshot(store: TLStore, props: Props) {
 
 // Replace slide contents with new props on Tldraw component.
 // Currently only supports a single Tldraw component per slide.
-export function updateTldrawProps(content: string, props: Props) {
+export function updateTldrawProps(content: string, state: State) {
   const openCloseRegex = /<tldraw[^>]*>.*<\/tldraw>/is;
 
   if (openCloseRegex.test(content)) {
-    return content.replace(openCloseRegex, (match) => updateAttrs(match, props));
+    return content.replace(openCloseRegex, (match) => updateAttrs(match, state));
   }
 
   const selfCloseRegex = /<tldraw.*\/>/is;
   if (selfCloseRegex.test(content)) {
-    return content.replace(selfCloseRegex, (match) => updateAttrs(match, props));
+    return content.replace(selfCloseRegex, (match) => updateAttrs(match, state));
   }
 
   return content;
 }
 
-export function updateAttrs(component: string, props: Props) {
+export function updateAttrs(component: string, state: State) {
   const doc = new DOMParser().parseFromString(component, 'text/html');
-  doc.body.firstElementChild?.setAttribute('doc', props.doc);
+  doc.body.firstElementChild?.setAttribute('doc', state.doc ?? '');
   return doc.body.innerHTML;
 }

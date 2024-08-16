@@ -3,7 +3,9 @@ declare global {
 
   interface ImportMeta {
     hot: {
-      send: (event: any, data: any) => void
+      send: (event: string, data: any) => void
+      on: (event: string, callback: (data: any) => void) => void
+      off: (event: string, callback: (data: any) => void) => void
     }
   }
 }

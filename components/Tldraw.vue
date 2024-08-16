@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute">
+  <div class="absolute" :class="{ isEditable, isNotEditable: !isEditable }">
     <div class="inverse-transform" ref="wrapperEl">
       <Tldraw
         @mount="onMount"
@@ -15,15 +15,17 @@
 import {
   debounce,
   Editor,
+  getUserPreferences,
   loadSnapshot,
+  setUserPreferences,
   TLComponents,
   Tldraw as TldrawReact,
   uniqueId,
 } from "tldraw";
-import { reactive, ref, shallowRef, watchEffect } from "vue";
+import { reactive, ref, shallowRef, watch } from "vue";
 import { applyPureReactInVue } from "veaury";
 import { useCssVar, useResizeObserver } from "@vueuse/core";
-import { useSlideContext } from "@slidev/client";
+import { useDarkMode, useSlideContext } from "@slidev/client";
 import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable";
 import { useStore } from "./useStore.ts";
@@ -87,6 +89,19 @@ const components: TLComponents = {
   DebugPanel: null,
 };
 
+// hook up color scheme
+const darkMode = useDarkMode();
+watch(
+  darkMode.isDark,
+  (isDark) => {
+    setUserPreferences({
+      ...getUserPreferences(),
+      colorScheme: isDark ? "dark" : "light",
+    });
+  },
+  { immediate: true }
+);
+
 // create editor ref
 const editorRef = shallowRef<Editor>();
 
@@ -102,17 +117,6 @@ const updateZoom = () => {
     w: 800,
     h: 800,
   };
-  editor.setCameraOptions({
-    isLocked: true,
-    constraints: {
-      bounds,
-      behavior: "inside",
-      initialZoom: "default",
-      baseZoom: "default",
-      origin: { x: 0, y: 0 },
-      padding: { x: 0, y: 0 },
-    },
-  });
   editor.zoomToBounds(bounds, { force: true, immediate: true, inset: 0 });
 };
 
@@ -139,10 +143,15 @@ const onMount = (editor: Editor) => {
 
   // initial zoom to fit
   updateZoom();
+  editor.setCameraOptions({ isLocked: true });
 
   // always provide scale to component as CSS variable, even in print mode
-  watchEffect(() => {
-    scale.value = String(context.$scale.value);
-  });
+  watch(
+    context.$scale,
+    (newScale) => {
+      scale.value = String(newScale);
+    },
+    { immediate: true }
+  );
 };
 </script>

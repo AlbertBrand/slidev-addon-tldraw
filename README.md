@@ -20,8 +20,6 @@ Make sure the diagram has a fixed width and height.
 
 Now, start the slideshow in development mode. Navigate to the slide, add new shapes etc. The diagram content will be saved under the `public` folder and a reference is created automatically in the existing slide.
 
-Note that some `tldraw` options are disabled (for now). The addon makes a tradeoff between features and simplicity.
-
 ## Example for existing tldraw diagrams
 
 Create a `public` folder, store the tldraw diagram in it and reference it in the slide:
@@ -35,6 +33,12 @@ Create a `public` folder, store the tldraw diagram in it and reference it in the
 ```
 
 Note that the visible area is fixed to 800x800 for now.
+
+## Features
+
+Uploading assets is fully supported. Drop files on the tldraw component (or use the upload asset icon), then files are uploaded to the `public/tldraw/assets` folder and referenced in the diagram.
+
+Note that some other `tldraw` options are disabled (for now). The addon makes a tradeoff between features and simplicity.
 
 ## Installation
 

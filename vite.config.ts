@@ -10,7 +10,10 @@ type StoreFileData = {
 
 export default defineConfig({
   optimizeDeps: {
-    include: ["veaury", "tldraw"],
+    include: [
+      "slidev-addon-tldraw > veaury",
+      "slidev-addon-tldraw > tldraw"
+    ],
   },
   plugins: [
     {

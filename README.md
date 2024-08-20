@@ -50,8 +50,6 @@ pnpm add slidev-addon-tldraw
 
 Then define this addon in the frontmatter of the slidedeck or in the `slidev` field of the `package.json`:
 
-### Frontmatter
-
 ```yaml
 ---
 addons:
@@ -59,7 +57,7 @@ addons:
 ---
 ```
 
-### package.json
+or
 
 ```json
  "slidev": {

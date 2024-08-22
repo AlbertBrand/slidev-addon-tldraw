@@ -3,6 +3,7 @@
     <div class="inverse-transform" ref="wrapperEl">
       <Tldraw
         @mount="onMount"
+        :autoFocus="false"
         :components="components"
         :store="store"
         :hideUi="!isEditable"
@@ -42,13 +43,11 @@ export type State = {
 // create Vue component from React component
 const Tldraw = applyPureReactInVue(TldrawReact);
 
-// get editable state from dev mode and slide view
+// computed editable state
 const isEditable = useIsEditable();
 
 // props for this component
 const props = defineProps<Partial<Props>>();
-
-const createUniqueDocPath = () => "tldraw/doc-" + uniqueId() + ".json";
 
 // internal state
 const state = reactive<State>({
@@ -66,6 +65,9 @@ const fetchSnapshot = async (doc: string) => {
   // zoom to fit after snapshot is loaded
   updateZoom();
 };
+
+// unique doc path based on simple unique id
+const createUniqueDocPath = () => "tldraw/doc-" + uniqueId() + ".json";
 
 // load initial snapshot from doc path (if set)
 if (props.doc) {
@@ -121,7 +123,7 @@ const updateZoom = () => {
 };
 
 // update zoom when wrapper resizes
-const wrapperEl = ref(null);
+const wrapperEl = ref<HTMLElement>();
 useResizeObserver(wrapperEl, debounce(updateZoom, 200));
 
 // create css var ref for slide scale
@@ -136,11 +138,6 @@ const onMount = (editor: Editor) => {
   }
   editorRef.value = editor;
 
-  // make readonly when not editable
-  editorRef.value.updateInstanceState({
-    isReadonly: !isEditable.value,
-  });
-
   // initial zoom to fit
   updateZoom();
   editor.setCameraOptions({ isLocked: true });
@@ -150,6 +147,26 @@ const onMount = (editor: Editor) => {
     context.$scale,
     (newScale) => {
       scale.value = String(newScale);
+    },
+    { immediate: true }
+  );
+
+  // update editor based on editable state
+  watch(
+    isEditable,
+    (editable) => {
+      // make readonly when not editable
+      editor.updateInstanceState({
+        isReadonly: !editable,
+      });
+
+      // focus editor when editable,
+      // similar to https://tldraw.dev/examples/basic/multiple
+      if (editable) {
+        editor.focus();
+      } else {
+        editor.blur();
+      }
     },
     { immediate: true }
   );

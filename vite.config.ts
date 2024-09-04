@@ -30,7 +30,7 @@ export default defineConfig({
             await mkdir(folderPath, { recursive: true });
             await writeFile(docPath, content.stream());
             // pause for a moment to let the file system catch up
-            await new Promise((resolve) => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 200));
             // send a message back to the client
             server.ws.send('tldraw:file-stored', { path: data.path })
           } catch (e) {

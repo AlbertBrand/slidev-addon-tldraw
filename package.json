@@ -30,21 +30,21 @@
   "author": "Albert Brand <abrand@xebia.com>",
   "license": "MIT",
   "devDependencies": {
-    "@slidev/cli": "^0.49.27",
+    "@slidev/cli": "^0.49.29",
     "@slidev/theme-default": "^0.25.0",
-    "@slidev/types": "^0.49.27",
-    "jsdom": "^24.1.1",
+    "@slidev/types": "^0.49.29",
+    "jsdom": "^24.1.3",
     "playwright-chromium": "^1.46.1",
-    "vite": "^5.4.2",
+    "vite": "^5.4.3",
     "vitest": "^2.0.5"
   },
   "peerDependencies": {
     "vue": "^3.4.33"
   },
   "dependencies": {
-    "@slidev/client": "^0.49.27",
+    "@slidev/client": "^0.49.29",
     "@vueuse/core": "^10.11.1",
-    "tldraw": "^2.4.5",
+    "tldraw": "^2.4.6",
     "veaury": "^2.4.3"
   }
 }

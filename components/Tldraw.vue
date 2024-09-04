@@ -7,6 +7,7 @@
         :components="components"
         :store="store"
         :hideUi="!isEditable"
+        :options="options"
       />
     </div>
   </div>
@@ -20,6 +21,7 @@ import {
   loadSnapshot,
   setUserPreferences,
   TLComponents,
+  TldrawOptions,
   Tldraw as TldrawReact,
   TLUiMainMenuProps,
   uniqueId,
@@ -95,6 +97,11 @@ const components: TLComponents = {
   MainMenu: toReact<TLUiMainMenuProps>(CustomMainMenuVue),
   PageMenu: null,
   DebugPanel: null,
+};
+
+// disable multiple pages
+const options: Partial<TldrawOptions> = {
+  maxPages: 1,
 };
 
 // hook up color scheme

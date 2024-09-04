@@ -21,15 +21,17 @@ import {
   setUserPreferences,
   TLComponents,
   Tldraw as TldrawReact,
+  TLUiMainMenuProps,
   uniqueId,
 } from "tldraw";
-import { reactive, ref, shallowRef, watch } from "vue";
-import { applyPureReactInVue } from "veaury";
+import { reactive, ref, shallowRef, watch, Component } from "vue";
+import { applyPureReactInVue, applyPureVueInReact } from "veaury";
 import { useCssVar, useResizeObserver } from "@vueuse/core";
 import { useDarkMode, useSlideContext } from "@slidev/client";
 import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable";
 import { useStore } from "./useStore.ts";
+import CustomMainMenuVue from "./CustomMainMenu.vue";
 import "./tldraw.css";
 
 type Props = {
@@ -39,6 +41,10 @@ type Props = {
 export type State = {
   doc?: string;
 };
+
+function toReact<C>(vueComponent: Component) {
+  return applyPureVueInReact(vueComponent) as React.ComponentType<C>;
+}
 
 // create Vue component from React component
 const Tldraw = applyPureReactInVue(TldrawReact);
@@ -86,7 +92,7 @@ const components: TLComponents = {
   ContextMenu: null,
   HelpMenu: null,
   NavigationPanel: null,
-  MainMenu: null,
+  MainMenu: toReact<TLUiMainMenuProps>(CustomMainMenuVue),
   PageMenu: null,
   DebugPanel: null,
 };

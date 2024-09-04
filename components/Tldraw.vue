@@ -8,6 +8,7 @@
         :store="store"
         :hideUi="!isEditable"
         :options="options"
+        :overrides="overrides"
       />
     </div>
   </div>
@@ -24,6 +25,7 @@ import {
   TldrawOptions,
   Tldraw as TldrawReact,
   TLUiMainMenuProps,
+  TLUiOverrides,
   uniqueId,
 } from "tldraw";
 import { reactive, ref, shallowRef, watch, Component } from "vue";
@@ -44,6 +46,7 @@ export type State = {
   doc?: string;
 };
 
+// convert Vue component to React component
 function toReact<C>(vueComponent: Component) {
   return applyPureVueInReact(vueComponent) as React.ComponentType<C>;
 }
@@ -102,6 +105,25 @@ const components: TLComponents = {
 // disable multiple pages
 const options: Partial<TldrawOptions> = {
   maxPages: 1,
+};
+
+// disable several actions
+const overrides: TLUiOverrides = {
+  actions(_, actions) {
+    delete actions["export-all-as-json"];
+    delete actions["export-all-as-png"];
+    delete actions["export-all-as-svg"];
+    delete actions["export-as-json"];
+    delete actions["export-as-png"];
+    delete actions["export-as-svg"];
+    delete actions["zoom-in"];
+    delete actions["zoom-out"];
+    delete actions["zoom-to-100"];
+    delete actions["zoom-to-fit"];
+    delete actions["zoom-to-selection"];
+    delete actions["toggle-dark-mode"];
+    return actions;
+  },
 };
 
 // hook up color scheme

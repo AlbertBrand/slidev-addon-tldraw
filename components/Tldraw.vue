@@ -24,7 +24,6 @@ import {
   TLComponents,
   TldrawOptions,
   Tldraw as TldrawReact,
-  TLUiMainMenuProps,
   TLUiOverrides,
   uniqueId,
 } from "tldraw";
@@ -97,7 +96,7 @@ const components: TLComponents = {
   ContextMenu: null,
   HelpMenu: null,
   NavigationPanel: null,
-  MainMenu: toReact<TLUiMainMenuProps>(CustomMainMenuVue),
+  MainMenu: toReact(CustomMainMenuVue),
   PageMenu: null,
   DebugPanel: null,
 };

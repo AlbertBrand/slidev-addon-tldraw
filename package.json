@@ -45,6 +45,6 @@
     "@slidev/client": "^0.49.29",
     "@vueuse/core": "^10.11.1",
     "tldraw": "^2.4.6",
-    "veaury": "^2.4.3"
+    "veaury": "^2.4.4"
   }
 }

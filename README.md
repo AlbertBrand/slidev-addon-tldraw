@@ -69,4 +69,4 @@ or
 
 ## License
 
-This addon is licensed MIT. Note that [the tldraw license](https://github.com/tldraw/tldraw/blob/main/LICENSE.md) is a custom license and only free for non-commercial use.
+This addon is licensed MIT. Note that tldraw has a custom license, see their [license page](https://github.com/tldraw/tldraw/blob/main/LICENSE.md) for more information.

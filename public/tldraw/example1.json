@@ -417,6 +417,98 @@
       "parentId": "page:page",
       "index": "aD",
       "typeName": "shape"
+    },
+    "shape:To35dgsqEchAkqW-ctkFa": {
+      "x": 629.250962829296,
+      "y": 37.805598621813004,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:To35dgsqEchAkqW-ctkFa",
+      "type": "text",
+      "props": {
+        "color": "black",
+        "size": "m",
+        "w": 258.99490404064727,
+        "text": "Drop SVG and images",
+        "font": "draw",
+        "textAlign": "start",
+        "autoSize": false,
+        "scale": 1.1349677164193805
+      },
+      "parentId": "page:page",
+      "index": "aE",
+      "typeName": "shape"
+    },
+    "shape:zkNBEJRBzA2l-NxBcMpxe": {
+      "x": 768.7464538233241,
+      "y": 205.24437202008284,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:zkNBEJRBzA2l-NxBcMpxe",
+      "type": "arrow",
+      "props": {
+        "dash": "draw",
+        "size": "m",
+        "fill": "none",
+        "color": "black",
+        "labelColor": "black",
+        "bend": -92.70648165367699,
+        "start": {
+          "x": -17.310725594779115,
+          "y": -130.33446102991104
+        },
+        "end": {
+          "x": -444.0186763064263,
+          "y": 70.53424612865942
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "arrow",
+        "text": "",
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:page",
+      "index": "aF",
+      "typeName": "shape"
+    },
+    "binding:CCKbvPG6Jq5uBO-RFxk3Y": {
+      "meta": {},
+      "id": "binding:CCKbvPG6Jq5uBO-RFxk3Y",
+      "type": "arrow",
+      "fromId": "shape:zkNBEJRBzA2l-NxBcMpxe",
+      "toId": "shape:-f2zxkAoQiJnluPe27dKF",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.49066757745215406,
+          "y": 0.3264988797117897
+        },
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "binding:TvawXdI6LP03gIvq7rwm9": {
+      "meta": {},
+      "id": "binding:TvawXdI6LP03gIvq7rwm9",
+      "type": "arrow",
+      "fromId": "shape:zkNBEJRBzA2l-NxBcMpxe",
+      "toId": "shape:To35dgsqEchAkqW-ctkFa",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "terminal": "start"
+      },
+      "typeName": "binding"
     }
   },
   "schema": {

@@ -23,9 +23,8 @@ export default defineConfig({
           const docPath = cwd() + '/public/' + decodeURIComponent(data.path);
           const folderPath = dirname(docPath);
           try {
-            // use fetch to convert the dataURL to a blob
-            const res = await fetch(data.content);
-            const content = await res.blob();
+	    // convert json data to a blob
+	    const content = new Blob([data.content], { type: 'application/json;charset=utf-8' });
             // write the blob to the file system
             await mkdir(folderPath, { recursive: true });
             await writeFile(docPath, content.stream());

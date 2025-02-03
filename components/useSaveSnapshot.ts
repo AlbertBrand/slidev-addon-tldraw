@@ -25,7 +25,7 @@ export function useSaveSnapshot(store: TLStore, state: State) {
 
     // store the snapshot on disk via the vite plugin
     if (import.meta.hot) {
-      import.meta.hot.send("tldraw:store-file", { path: state.doc, content: json });
+      import.meta.hot.send("tldraw:store-file", { path: state.doc, content: json, type: 'json' });
     }
 
     // update the slide content to include the doc prop

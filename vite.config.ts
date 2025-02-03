@@ -6,6 +6,7 @@ import { cwd } from "node:process";
 type StoreFileData = {
   path: string;
   content: string;
+  type: 'file' | 'json';
 }
 
 export default defineConfig({
@@ -23,8 +24,15 @@ export default defineConfig({
           const docPath = cwd() + '/public/' + decodeURIComponent(data.path);
           const folderPath = dirname(docPath);
           try {
-	    // convert json data to a blob
-	    const content = new Blob([data.content], { type: 'application/json;charset=utf-8' });
+	    let content: Blob;
+	    if (data.type === 'json) {
+	      // convert json data to a blob
+	      content = new Blob([data.content], { type: 'application/json;charset=utf-8' });
+	    } else {
+	      // use fetch to convert the dataURL to a blob
+	      const res = await fetch(data.content);
+	      content = await res.blob();
+	    }
             // write the blob to the file system
             await mkdir(folderPath, { recursive: true });
             await writeFile(docPath, content.stream());

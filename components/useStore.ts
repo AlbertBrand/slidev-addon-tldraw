@@ -21,7 +21,7 @@ const assets: TLAssetStore = {
       import.meta.hot.send("tldraw:store-file", {
         path: imagePath,
         content: encodedFile,
-	type: 'file',
+        type: "file",
       });
 
       // wait for the file to be stored

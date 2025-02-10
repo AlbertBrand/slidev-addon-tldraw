@@ -1,7 +1,4 @@
-import {
-  getSnapshot,
-  TLStore,
-} from "tldraw";
+import { getSnapshot, TLStore } from "tldraw";
 import { watchEffect } from "vue";
 import { useSlideContext } from "@slidev/client";
 import { useDynamicSlideInfo } from "@slidev/client/composables/useSlideInfo.ts";
@@ -25,7 +22,11 @@ export function useSaveSnapshot(store: TLStore, state: State) {
 
     // store the snapshot on disk via the vite plugin
     if (import.meta.hot) {
-      import.meta.hot.send("tldraw:store-file", { path: state.doc, content: json, type: 'json' });
+      import.meta.hot.send("tldraw:store-file", {
+        path: state.doc,
+        content: json,
+        type: "json",
+      });
     }
 
     // update the slide content to include the doc prop
@@ -47,19 +48,23 @@ export function updateTldrawProps(content: string, state: State) {
   const openCloseRegex = /<tldraw[^>]*>.*<\/tldraw>/is;
 
   if (openCloseRegex.test(content)) {
-    return content.replace(openCloseRegex, (match) => updateAttrs(match, state));
+    return content.replace(openCloseRegex, (match) =>
+      updateAttrs(match, state)
+    );
   }
 
   const selfCloseRegex = /<tldraw.*\/>/is;
   if (selfCloseRegex.test(content)) {
-    return content.replace(selfCloseRegex, (match) => updateAttrs(match, state));
+    return content.replace(selfCloseRegex, (match) =>
+      updateAttrs(match, state)
+    );
   }
 
   return content;
 }
 
 export function updateAttrs(component: string, state: State) {
-  const doc = new DOMParser().parseFromString(component, 'text/html');
-  doc.body.firstElementChild?.setAttribute('doc', state.doc ?? '');
+  const doc = new DOMParser().parseFromString(component, "text/html");
+  doc.body.firstElementChild?.setAttribute("doc", state.doc ?? "");
   return doc.body.innerHTML;
 }

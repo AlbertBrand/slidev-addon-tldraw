@@ -702,7 +702,7 @@
       "com.tldraw.instance": 25,
       "com.tldraw.instance_page_state": 5,
       "com.tldraw.page": 1,
-      "com.tldraw.instance_presence": 5,
+      "com.tldraw.instance_presence": 6,
       "com.tldraw.pointer": 1,
       "com.tldraw.shape": 4,
       "com.tldraw.asset.bookmark": 2,
@@ -718,7 +718,7 @@
       "com.tldraw.shape.highlight": 1,
       "com.tldraw.shape.image": 4,
       "com.tldraw.shape.line": 5,
-      "com.tldraw.shape.note": 7,
+      "com.tldraw.shape.note": 8,
       "com.tldraw.shape.text": 2,
       "com.tldraw.shape.video": 2,
       "com.tldraw.binding.arrow": 0

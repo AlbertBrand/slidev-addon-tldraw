@@ -15,8 +15,8 @@
       "typeName": "page"
     },
     "shape:j2DELfiEEnP4yxbgbhquJ": {
-      "x": 619.1955468600587,
-      "y": 434.47182326091263,
+      "x": 838.0901230978774,
+      "y": 478.05826238166816,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -28,14 +28,15 @@
       "props": {
         "color": "black",
         "size": "m",
-        "text": "Edit tldraw diagrams inline in Slidev!",
+        "text": "Edit tldraw diagrams 😀 inline in Slidev!",
         "font": "draw",
         "align": "middle",
         "verticalAlign": "middle",
         "growY": 0,
         "fontSizeAdjustment": 22,
         "url": "",
-        "scale": 1
+        "scale": 1,
+        "labelColor": "black"
       },
       "typeName": "shape"
     },
@@ -93,8 +94,8 @@
       "typeName": "shape"
     },
     "shape:FUn6KCAosSQTaMsc_q4w2": {
-      "x": 785.1110937371071,
-      "y": 323.92303433288805,
+      "x": 600.1405434300603,
+      "y": 201.41190625514517,
       "rotation": 5.934119456780721,
       "isLocked": false,
       "opacity": 1,
@@ -521,7 +522,7 @@
       "com.tldraw.instance": 25,
       "com.tldraw.instance_page_state": 5,
       "com.tldraw.page": 1,
-      "com.tldraw.instance_presence": 5,
+      "com.tldraw.instance_presence": 6,
       "com.tldraw.pointer": 1,
       "com.tldraw.shape": 4,
       "com.tldraw.asset.bookmark": 2,
@@ -537,7 +538,7 @@
       "com.tldraw.shape.highlight": 1,
       "com.tldraw.shape.image": 4,
       "com.tldraw.shape.line": 5,
-      "com.tldraw.shape.note": 7,
+      "com.tldraw.shape.note": 8,
       "com.tldraw.shape.text": 2,
       "com.tldraw.shape.video": 2,
       "com.tldraw.binding.arrow": 0

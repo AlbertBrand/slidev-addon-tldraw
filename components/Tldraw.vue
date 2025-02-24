@@ -1,5 +1,13 @@
 <template>
-  <div class="absolute" :class="{ isEditable, isNotEditable: !isEditable }">
+  <div
+    class="absolute"
+    :class="{
+      isEditable,
+      isNotEditable: !isEditable,
+      isVisible,
+      isNotVisible: !isVisible,
+    }"
+  >
     <div ref="wrapperEl" class="inverse-transform">
       <Tldraw
         :auto-focus="false"
@@ -154,10 +162,19 @@ const context = useSlideContext();
 // is tldraw React component mounted
 const isMounted = ref(false);
 
+// is tldraw React component visible
+const isVisible = ref(false);
+
 // zoom to fit bounds function
 const updateZoom = () => {
   const editor = editorRef.value;
   if (!editor) return;
+
+  // check if editor is visible
+  const viewportScreenBounds = editor.getViewportScreenBounds();
+  if (viewportScreenBounds.w <= 1 || viewportScreenBounds.h <= 1) {
+    return;
+  }
 
   // square bounds, size makes text still readable
   const bounds = {
@@ -167,6 +184,9 @@ const updateZoom = () => {
     h: 800,
   };
   editor.zoomToBounds(bounds, { force: true, immediate: true, inset: 0 });
+
+  // set visible flag
+  isVisible.value = true;
 };
 
 // update zoom when wrapper resizes

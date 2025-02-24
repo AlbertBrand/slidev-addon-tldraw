@@ -25,3 +25,7 @@
 .isNotEditable .tl-container__focused {
   outline: none;
 }
+
+.isNotVisible {
+  visibility: hidden;
+}

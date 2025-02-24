@@ -42,6 +42,7 @@ import {
   watch,
   Component,
   onBeforeUnmount,
+  computed,
 } from "vue";
 import { applyPureReactInVue, applyPureVueInReact } from "veaury";
 import { useCssVar, useResizeObserver } from "@vueuse/core";
@@ -50,6 +51,7 @@ import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable";
 import { useStore } from "./useStore";
 import CustomMainMenuVue from "./CustomMainMenu.vue";
+import CustomToolbarVue from "./CustomToolbar.vue";
 import { createRoot } from "react-dom/client";
 import { setVeauryOptions } from "veaury";
 import "./tldraw.css";
@@ -116,14 +118,23 @@ if (props.doc) {
 }
 
 // disable several UI components
-const components: TLComponents = {
+const activeComponents: TLComponents = {
   ContextMenu: null,
   HelpMenu: null,
   NavigationPanel: null,
   MainMenu: toReact(CustomMainMenuVue),
+  Toolbar: toReact(CustomToolbarVue),
   PageMenu: null,
   DebugPanel: null,
 };
+const inactiveComponents: TLComponents = {
+  ...activeComponents,
+  MainMenu: null,
+  Toolbar: null,
+};
+const components = computed(() =>
+  isEditable.value ? activeComponents : inactiveComponents
+);
 
 // disable multiple pages
 const options: Partial<TldrawOptions> = {

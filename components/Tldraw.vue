@@ -50,7 +50,16 @@ import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable";
 import { useStore } from "./useStore";
 import CustomMainMenuVue from "./CustomMainMenu.vue";
+import { createRoot } from "react-dom/client";
+import { setVeauryOptions } from "veaury";
 import "./tldraw.css";
+
+// react-dom >= 19, manually configure createRoot in the veaury configuration
+setVeauryOptions({
+  react: {
+    createRoot,
+  },
+});
 
 type Props = {
   doc: string;

@@ -1,6 +1,6 @@
 {
   "name": "slidev-addon-tldraw",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Slidev addon to show and edit tldraw diagrams",
   "type": "module",
   "scripts": {

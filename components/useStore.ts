@@ -35,7 +35,7 @@ const assets: TLAssetStore = {
       });
     }
 
-    return "/" + imagePath;
+    return { src: "/" + imagePath };
   },
 
   resolve(asset) {

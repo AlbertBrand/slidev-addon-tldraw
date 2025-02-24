@@ -1,14 +1,14 @@
 <template>
   <div class="absolute" :class="{ isEditable, isNotEditable: !isEditable }">
-    <div class="inverse-transform" ref="wrapperEl">
+    <div ref="wrapperEl" class="inverse-transform">
       <Tldraw
-        @mount="onMount"
-        :autoFocus="false"
+        :auto-focus="false"
         :components="components"
         :store="store"
-        :hideUi="!isEditable"
+        :hide-ui="!isEditable"
         :options="options"
         :overrides="overrides"
+        @mount="onMount"
       />
     </div>
   </div>
@@ -33,7 +33,7 @@ import { useCssVar, useResizeObserver } from "@vueuse/core";
 import { useDarkMode, useSlideContext } from "@slidev/client";
 import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable";
-import { useStore } from "./useStore.ts";
+import { useStore } from "./useStore";
 import CustomMainMenuVue from "./CustomMainMenu.vue";
 import "./tldraw.css";
 

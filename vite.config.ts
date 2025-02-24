@@ -3,7 +3,11 @@ import { storeFile, type StoreFileData } from "./server/storeFile";
 
 export default defineConfig({
   optimizeDeps: {
-    include: ["slidev-addon-tldraw > veaury", "slidev-addon-tldraw > tldraw"],
+    include: [
+      "slidev-addon-tldraw > veaury",
+      "slidev-addon-tldraw > tldraw",
+      "slidev-addon-tldraw > react-dom/client",
+    ],
   },
   plugins: [
     {

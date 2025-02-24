@@ -27,7 +27,14 @@ import {
   TLUiOverrides,
   uniqueId,
 } from "tldraw";
-import { reactive, ref, shallowRef, watch, Component } from "vue";
+import {
+  reactive,
+  ref,
+  shallowRef,
+  watch,
+  Component,
+  onBeforeUnmount,
+} from "vue";
 import { applyPureReactInVue, applyPureVueInReact } from "veaury";
 import { useCssVar, useResizeObserver } from "@vueuse/core";
 import { useDarkMode, useSlideContext } from "@slidev/client";
@@ -141,7 +148,13 @@ watch(
 // create editor ref
 const editorRef = shallowRef<Editor>();
 
-// zoom to fit bounds
+// slide context (exposing slide scale and others)
+const context = useSlideContext();
+
+// is tldraw React component mounted
+const isMounted = ref(false);
+
+// zoom to fit bounds function
 const updateZoom = () => {
   const editor = editorRef.value;
   if (!editor) return;
@@ -163,17 +176,31 @@ useResizeObserver(wrapperEl, debounce(updateZoom, 200));
 // create css var ref for slide scale
 const scale = useCssVar("--slide-scale", wrapperEl);
 
-const context = useSlideContext();
+// prepare save snapshot on change function
 const debouncedSaveSnapshot = debounce(useSaveSnapshot(store, state), 500);
-const onMount = (editor: Editor) => {
-  if (!editorRef.value) {
-    // listen to all changes and save snapshot after debounce period
-    store.listen(debouncedSaveSnapshot, { source: "user", scope: "all" });
-  }
-  editorRef.value = editor;
 
-  // initial zoom to fit
-  updateZoom();
+// perform actions after tldraw has mounted
+const onMount = (editor: Editor) => {
+  if (!isMounted.value) {
+    // set mounted flag
+    isMounted.value = true;
+
+    // store ref to editor
+    editorRef.value = editor;
+
+    // listen to all changes
+    store.listen(
+      () => {
+        // if still mounted, save snapshot after debounce period
+        if (isMounted.value) {
+          debouncedSaveSnapshot();
+        }
+      },
+      { source: "user", scope: "all" }
+    );
+  }
+
+  // lock camera
   editor.setCameraOptions({ isLocked: true });
 
   // always provide scale to component as CSS variable, even in print mode
@@ -205,4 +232,9 @@ const onMount = (editor: Editor) => {
     { immediate: true }
   );
 };
+
+onBeforeUnmount(() => {
+  // stop pending listeners on unmount
+  isMounted.value = false;
+});
 </script>

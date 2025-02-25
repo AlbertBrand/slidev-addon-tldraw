@@ -42,7 +42,6 @@ import {
   watch,
   Component,
   onBeforeUnmount,
-  computed,
 } from "vue";
 import { applyPureReactInVue, applyPureVueInReact } from "veaury";
 import { useCssVar, useResizeObserver } from "@vueuse/core";

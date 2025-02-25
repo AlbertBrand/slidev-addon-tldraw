@@ -10,10 +10,10 @@
   >
     <div ref="wrapperEl" class="inverse-transform">
       <Tldraw
-        :auto-focus="false"
+        :autoFocus="false"
         :components="components"
         :store="store"
-        :hide-ui="!isEditable"
+        :hideUi="!isEditable"
         :options="options"
         :overrides="overrides"
         @mount="onMount"
@@ -117,24 +117,16 @@ if (props.doc) {
   state.doc = createUniqueDocPath();
 }
 
-// disable several UI components
-const activeComponents: TLComponents = {
+// customize/disable several UI components
+const components: TLComponents = {
+  MainMenu: toReact(CustomMainMenuVue),
+  Toolbar: toReact(CustomToolbarVue),
   ContextMenu: null,
   HelpMenu: null,
   NavigationPanel: null,
-  MainMenu: toReact(CustomMainMenuVue),
-  Toolbar: toReact(CustomToolbarVue),
   PageMenu: null,
   DebugPanel: null,
 };
-const inactiveComponents: TLComponents = {
-  ...activeComponents,
-  MainMenu: null,
-  Toolbar: null,
-};
-const components = computed(() =>
-  isEditable.value ? activeComponents : inactiveComponents
-);
 
 // disable multiple pages
 const options: Partial<TldrawOptions> = {

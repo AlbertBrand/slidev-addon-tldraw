@@ -23,6 +23,7 @@ export default typescriptEslint.config(
     },
     rules: {
       "vue/multi-word-component-names": "off",
+      "vue/attribute-hyphenation": "off",
     },
   },
   eslintConfigPrettier

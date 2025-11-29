@@ -14,11 +14,8 @@ importers:
       '@vueuse/core':
         specifier: ^12.7.0
         version: 12.7.0(typescript@5.7.3)
-      react:
-        specifier: ^19.0.0
-        version: 19.0.0
       react-dom:
-        specifier: ^19.0.0
+        specifier: ^18.2.0 || ^19.0.0
         version: 19.0.0(react@19.0.0)
       tldraw:
         specifier: ^3.8.1
@@ -32,7 +29,7 @@ importers:
     devDependencies:
       '@slidev/cli':
         specifier: ^51.3.0
-        version: 51.3.0(@babel/parser@7.26.9)(@nuxt/kit@3.15.4)(@types/markdown-it@14.1.2)(@types/node@18.19.76)(@vue/compiler-sfc@3.5.13)(markdown-it-async@2.0.0)(playwright-chromium@1.50.1)(postcss@8.5.3)(react@19.0.0)(tsx@4.19.2)(vue-template-compiler@2.7.16)
+        version: 51.3.0(@babel/parser@7.26.9)(@nuxt/kit@3.15.4)(@types/markdown-it@14.1.2)(@types/node@18.19.76)(@vue/compiler-sfc@3.5.13)(markdown-it-async@2.0.0)(playwright-chromium@1.57.0)(postcss@8.5.3)(react@19.0.0)(tsx@4.19.2)(vue-template-compiler@2.7.16)
       '@slidev/theme-default':
         specifier: ^0.25.0
         version: 0.25.0
@@ -68,7 +65,7 @@ importers:
         version: 26.0.0
       playwright-chromium:
         specifier: ^1.50.1
-        version: 1.50.1
+        version: 1.57.0
       prettier:
         specifier: ^3.5.2
         version: 3.5.2
@@ -2581,8 +2578,8 @@ packages:
     resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}
     engines: {node: '>=10'}
 
-  get-tsconfig@4.10.0:
-    resolution: {integrity: sha512-kGzZ3LWWQcGIAmg6iWvXn0ei6WDtV26wzHRMwDSzmAbcXrTEXxHy6IehI6/4eT6VRKyMP1eF1VqwrVUmE/LR7A==}
+  get-tsconfig@4.13.0:
+    resolution: {integrity: sha512-1VKTZJCwBrvbd+Wn3AOgQP/2Av+TfTCOlE4AcRJE72W1ksZXbAx8PPBR9RzgTeSPzlPMHrbANMH3LbltH73wxQ==}
 
   giget@1.2.5:
     resolution: {integrity: sha512-r1ekGw/Bgpi3HLV3h1MRBIlSAdHoIMklpaQ3OQLFcRw9PwAj2rqigvIbg+dBUI51OxVI2jsEtDywDBjSiuf7Ug==}
@@ -3331,13 +3328,13 @@ packages:
   plantuml-encoder@1.4.0:
     resolution: {integrity: sha512-sxMwpDw/ySY1WB2CE3+IdMuEcWibJ72DDOsXLkSmEaSzwEUaYBT6DWgOfBiHGCux4q433X6+OEFWjlVqp7gL6g==}
 
-  playwright-chromium@1.50.1:
-    resolution: {integrity: sha512-0IKyCdwS5dDoGE3EqqfYtX24qF6+ef1UI6OLn2VUi2aHOgsI/KnESRm6/Ws0W78SrwhLi6lLlAL6fQISoO1cfw==}
+  playwright-chromium@1.57.0:
+    resolution: {integrity: sha512-GCVVTbmIDrZuBxWYoQ70rehRXMb3Q7ccENe63a+rGTWwypeVAgh/DD5o5QQ898oer5pdIv3vGINUlEkHtOZQEw==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright-core@1.50.1:
-    resolution: {integrity: sha512-ra9fsNWayuYumt+NiM069M6OkcRb1FZSK8bgi66AtpFoWkg2+y0bJSNmkFrWhMbEBbVKC/EruAHH3g0zmtwGmQ==}
+  playwright-core@1.57.0:
+    resolution: {integrity: sha512-agTcKlMw/mjBWOnD6kFZttAAGHgi/Nw0CZ2o6JqWSbMlI219lAFLZZCyqByTsvVAJq5XA5H8cA6PrvBRpBWEuQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -5328,7 +5325,7 @@ snapshots:
   '@sindresorhus/merge-streams@2.3.0':
     optional: true
 
-  '@slidev/cli@51.3.0(@babel/parser@7.26.9)(@nuxt/kit@3.15.4)(@types/markdown-it@14.1.2)(@types/node@18.19.76)(@vue/compiler-sfc@3.5.13)(markdown-it-async@2.0.0)(playwright-chromium@1.50.1)(postcss@8.5.3)(react@19.0.0)(tsx@4.19.2)(vue-template-compiler@2.7.16)':
+  '@slidev/cli@51.3.0(@babel/parser@7.26.9)(@nuxt/kit@3.15.4)(@types/markdown-it@14.1.2)(@types/node@18.19.76)(@vue/compiler-sfc@3.5.13)(markdown-it-async@2.0.0)(playwright-chromium@1.57.0)(postcss@8.5.3)(react@19.0.0)(tsx@4.19.2)(vue-template-compiler@2.7.16)':
     dependencies:
       '@antfu/ni': 23.3.1
       '@antfu/utils': 9.1.0
@@ -5400,7 +5397,7 @@ snapshots:
       yaml: 2.7.0
       yargs: 17.7.2
     optionalDependencies:
-      playwright-chromium: 1.50.1
+      playwright-chromium: 1.57.0
     transitivePeerDependencies:
       - '@babel/parser'
       - '@nuxt/kit'
@@ -7176,7 +7173,7 @@ snapshots:
 
   get-stream@6.0.1: {}
 
-  get-tsconfig@4.10.0:
+  get-tsconfig@4.13.0:
     dependencies:
       resolve-pkg-maps: 1.0.0
     optional: true
@@ -8069,11 +8066,11 @@ snapshots:
 
   plantuml-encoder@1.4.0: {}
 
-  playwright-chromium@1.50.1:
+  playwright-chromium@1.57.0:
     dependencies:
-      playwright-core: 1.50.1
+      playwright-core: 1.57.0
 
-  playwright-core@1.50.1: {}
+  playwright-core@1.57.0: {}
 
   points-on-curve@0.2.0: {}
 
@@ -8503,7 +8500,7 @@ snapshots:
   tsx@4.19.2:
     dependencies:
       esbuild: 0.23.1
-      get-tsconfig: 4.10.0
+      get-tsconfig: 4.13.0
     optionalDependencies:
       fsevents: 2.3.3
     optional: true

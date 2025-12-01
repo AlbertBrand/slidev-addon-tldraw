@@ -5,6 +5,35 @@ Edit your [tldraw](https://tldraw.dev) diagrams directly in
 
 ![example](./example-assets/tldraw-in-slidev.png)
 
+## Installation
+
+Use your favorite package manager to install the addon in your existing Slidev presentation, for instance using `pnpm`:
+
+```bash
+pnpm add slidev-addon-tldraw
+```
+
+Then define this addon in the frontmatter of the slidedeck:
+
+```yaml
+---
+addons:
+  - slidev-addon-tldraw
+---
+```
+
+or in the `slidev` field of the `package.json`:
+
+```json
+ "slidev": {
+    "addons": [
+      "slidev-addon-tldraw"
+    ]
+  },
+```
+
+NOTE: you need to specify the full addon name since Slidev 52.x, not just `tldraw`.
+
 ## Example with a new tldraw diagram
 
 Add a new slide with the following content:
@@ -71,34 +100,6 @@ style:
 
 Other `tldraw` options, such as multi-page diagrams are disabled (for now). The
 addon makes a tradeoff between features and simplicity.
-
-## Installation
-
-Use your favorite package manager to install the addon:
-
-```bash
-pnpm add slidev-addon-tldraw
-```
-
-Then define this addon in the frontmatter of the slidedeck or in the `slidev`
-field of the `package.json`:
-
-```yaml
----
-addons:
-  - tldraw
----
-```
-
-or
-
-```json
- "slidev": {
-    "addons": [
-      "tldraw"
-    ]
-  },
-```
 
 ## License
 

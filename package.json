@@ -46,10 +46,10 @@
     "globals": "^16.5.0",
     "jsdom": "^27.2.0",
     "playwright-chromium": "^1.57.0",
-    "prettier": "^3.7.3",
-    "typescript-eslint": "^8.48.0",
+    "prettier": "^3.7.4",
+    "typescript-eslint": "^8.48.1",
     "vite": "^7.2.6",
-    "vitest": "^4.0.14"
+    "vitest": "^4.0.15"
   },
   "peerDependencies": {
     "react": "^18.2.0 || ^19.0.0",

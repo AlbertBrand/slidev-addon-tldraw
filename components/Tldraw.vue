@@ -8,7 +8,7 @@
       isNotVisible: !isVisible,
     }"
   >
-    <div ref="wrapperEl" class="inverse-transform">
+    <div ref="wrapperEl" class="inverse-transform" @keydown="wrapperKeydown">
       <Tldraw
         :autoFocus="false"
         :components="components"
@@ -198,6 +198,11 @@ const updateZoom = () => {
 
   // set visible flag
   isVisible.value = true;
+};
+
+const wrapperKeydown = (e: KeyboardEvent) => {
+  // prevent slidev from handling keydown events when tldraw is focused
+  e.stopPropagation();
 };
 
 // update zoom when wrapper resizes

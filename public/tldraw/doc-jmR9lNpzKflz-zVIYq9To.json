@@ -1,18 +1,98 @@
 {
   "store": {
-    "document:document": {
-      "gridSize": 10,
-      "name": "",
+    "shape:5DeYTkM6kL0IeejujuQkK": {
+      "x": 419.3244177108652,
+      "y": 243.6520092717556,
+      "rotation": 0.19198621771937624,
+      "isLocked": false,
+      "opacity": 1,
       "meta": {},
-      "id": "document:document",
-      "typeName": "document"
+      "id": "shape:5DeYTkM6kL0IeejujuQkK",
+      "type": "image",
+      "props": {
+        "w": 325.8551862421421,
+        "h": 346.2324059684078,
+        "assetId": "asset:941767786",
+        "playing": true,
+        "url": "",
+        "crop": null,
+        "flipX": false,
+        "flipY": false,
+        "altText": ""
+      },
+      "parentId": "page:page",
+      "index": "a2",
+      "typeName": "shape"
     },
-    "page:page": {
+    "binding:Tq6e8vMwfhij2RC9PkhtN": {
       "meta": {},
-      "id": "page:page",
-      "name": "Page 1",
-      "index": "a1",
-      "typeName": "page"
+      "id": "binding:Tq6e8vMwfhij2RC9PkhtN",
+      "type": "arrow",
+      "fromId": "shape:jGgO-OZNQNCNQtyj3vsZc",
+      "toId": "shape:5DeYTkM6kL0IeejujuQkK",
+      "props": {
+        "isPrecise": false,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5324883952359072,
+          "y": 0.6394477591138544
+        },
+        "terminal": "end",
+        "snap": "none"
+      },
+      "typeName": "binding"
+    },
+    "asset:941767786": {
+      "meta": {},
+      "id": "asset:941767786",
+      "type": "image",
+      "typeName": "asset",
+      "props": {
+        "name": "tldrawFile",
+        "src": "/tldraw/assets/SJr22o2fBc9y7rKqqs7VS-tldrawFile",
+        "w": 1807,
+        "h": 1920,
+        "fileSize": 191014,
+        "mimeType": "image/png",
+        "isAnimated": false
+      }
+    },
+    "shape:jGgO-OZNQNCNQtyj3vsZc": {
+      "x": -7.541715343064823,
+      "y": 528.5775185808919,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:jGgO-OZNQNCNQtyj3vsZc",
+      "type": "arrow",
+      "props": {
+        "dash": "draw",
+        "size": "m",
+        "fill": "none",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 345.76030245282755,
+          "y": -0.31895265726427624
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "arrow",
+        "text": "",
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1,
+        "kind": "arc",
+        "elbowMidPoint": 0.5
+      },
+      "parentId": "page:page",
+      "index": "a4",
+      "typeName": "shape"
     },
     "shape:35fydjYCGGDqoQlyzIjaL": {
       "x": -75.92394709371632,
@@ -539,59 +619,6 @@
       "index": "a1",
       "typeName": "shape"
     },
-    "asset:832450727": {
-      "meta": {},
-      "id": "asset:832450727",
-      "type": "image",
-      "typeName": "asset",
-      "props": {
-        "name": "tldrawFile",
-        "src": "/tldraw/assets/9M9vWAk4iJbH0SFEUYD3h-tldrawFile",
-        "w": 800,
-        "h": 800,
-        "fileSize": 263945,
-        "mimeType": "image/png",
-        "isAnimated": false
-      }
-    },
-    "asset:941767786": {
-      "meta": {},
-      "id": "asset:941767786",
-      "type": "image",
-      "typeName": "asset",
-      "props": {
-        "name": "tldrawFile",
-        "src": "/tldraw/assets/SJr22o2fBc9y7rKqqs7VS-tldrawFile",
-        "w": 1807,
-        "h": 1920,
-        "fileSize": 191014,
-        "mimeType": "image/png",
-        "isAnimated": false
-      }
-    },
-    "shape:5DeYTkM6kL0IeejujuQkK": {
-      "x": 419.3244177108652,
-      "y": 243.6520092717556,
-      "rotation": 0.19198621771937624,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:5DeYTkM6kL0IeejujuQkK",
-      "type": "image",
-      "props": {
-        "w": 325.8551862421421,
-        "h": 346.2324059684078,
-        "assetId": "asset:941767786",
-        "playing": true,
-        "url": "",
-        "crop": null,
-        "flipX": false,
-        "flipY": false
-      },
-      "parentId": "page:page",
-      "index": "a2",
-      "typeName": "shape"
-    },
     "shape:GZ3PHYLj8KC8hudfNN14f": {
       "x": -102.78130681653244,
       "y": 411.6623141837062,
@@ -611,50 +638,28 @@
         "dash": "draw",
         "size": "m",
         "font": "draw",
-        "text": "Bear",
         "align": "middle",
         "verticalAlign": "middle",
         "growY": 0,
         "url": "",
-        "scale": 1
+        "scale": 1,
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Bear"
+                }
+              ]
+            }
+          ]
+        }
       },
       "parentId": "page:page",
       "index": "a3",
-      "typeName": "shape"
-    },
-    "shape:jGgO-OZNQNCNQtyj3vsZc": {
-      "x": -7.541715343064823,
-      "y": 528.5775185808919,
-      "rotation": 0,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:jGgO-OZNQNCNQtyj3vsZc",
-      "type": "arrow",
-      "props": {
-        "dash": "draw",
-        "size": "m",
-        "fill": "none",
-        "color": "black",
-        "labelColor": "black",
-        "bend": 0,
-        "start": {
-          "x": 0,
-          "y": 0
-        },
-        "end": {
-          "x": 345.76030245282755,
-          "y": -0.31895265726427624
-        },
-        "arrowheadStart": "none",
-        "arrowheadEnd": "arrow",
-        "text": "",
-        "labelPosition": 0.5,
-        "font": "draw",
-        "scale": 1
-      },
-      "parentId": "page:page",
-      "index": "a4",
       "typeName": "shape"
     },
     "binding:665v3CaSbHdX9VL1JfnKB": {
@@ -670,26 +675,39 @@
           "x": 0.47619795736733805,
           "y": 0.5845760219859286
         },
-        "terminal": "start"
+        "terminal": "start",
+        "snap": "none"
       },
       "typeName": "binding"
     },
-    "binding:Tq6e8vMwfhij2RC9PkhtN": {
+    "page:page": {
       "meta": {},
-      "id": "binding:Tq6e8vMwfhij2RC9PkhtN",
-      "type": "arrow",
-      "fromId": "shape:jGgO-OZNQNCNQtyj3vsZc",
-      "toId": "shape:5DeYTkM6kL0IeejujuQkK",
+      "id": "page:page",
+      "name": "Page 1",
+      "index": "a1",
+      "typeName": "page"
+    },
+    "document:document": {
+      "gridSize": 10,
+      "name": "",
+      "meta": {},
+      "id": "document:document",
+      "typeName": "document"
+    },
+    "asset:832450727": {
+      "meta": {},
+      "id": "asset:832450727",
+      "type": "image",
+      "typeName": "asset",
       "props": {
-        "isPrecise": false,
-        "isExact": false,
-        "normalizedAnchor": {
-          "x": 0.5324883952359072,
-          "y": 0.6394477591138544
-        },
-        "terminal": "end"
-      },
-      "typeName": "binding"
+        "name": "tldrawFile",
+        "src": "/tldraw/assets/9M9vWAk4iJbH0SFEUYD3h-tldrawFile",
+        "w": 800,
+        "h": 800,
+        "fileSize": 263945,
+        "mimeType": "image/png",
+        "isAnimated": false
+      }
     }
   },
   "schema": {
@@ -708,20 +726,20 @@
       "com.tldraw.asset.bookmark": 2,
       "com.tldraw.asset.image": 5,
       "com.tldraw.asset.video": 5,
-      "com.tldraw.shape.arrow": 5,
+      "com.tldraw.shape.arrow": 6,
       "com.tldraw.shape.bookmark": 2,
       "com.tldraw.shape.draw": 2,
       "com.tldraw.shape.embed": 4,
-      "com.tldraw.shape.frame": 0,
-      "com.tldraw.shape.geo": 9,
+      "com.tldraw.shape.frame": 1,
+      "com.tldraw.shape.geo": 10,
       "com.tldraw.shape.group": 0,
       "com.tldraw.shape.highlight": 1,
-      "com.tldraw.shape.image": 4,
+      "com.tldraw.shape.image": 5,
       "com.tldraw.shape.line": 5,
-      "com.tldraw.shape.note": 8,
-      "com.tldraw.shape.text": 2,
-      "com.tldraw.shape.video": 2,
-      "com.tldraw.binding.arrow": 0
+      "com.tldraw.shape.note": 9,
+      "com.tldraw.shape.text": 3,
+      "com.tldraw.shape.video": 4,
+      "com.tldraw.binding.arrow": 1
     }
   }
 }

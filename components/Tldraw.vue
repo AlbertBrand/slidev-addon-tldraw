@@ -201,8 +201,17 @@ const updateZoom = () => {
 };
 
 const wrapperKeydown = (e: KeyboardEvent) => {
-  // prevent slidev from handling keydown events when tldraw is focused
-  e.stopPropagation();
+  // prevent slidev from handling character keydown events when tldraw is focused
+  if (
+    e.key.length > 0 &&
+    e.code !== "Backspace" &&
+    e.code !== "Delete" &&
+    !e.ctrlKey &&
+    !e.metaKey &&
+    !e.altKey
+  ) {
+    e.stopPropagation();
+  }
 };
 
 // update zoom when wrapper resizes

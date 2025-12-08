@@ -59,7 +59,7 @@
   "dependencies": {
     "@slidev/client": "^52.10.1",
     "@vueuse/core": "^14.1.0",
-    "tldraw": "^3.15.5",
+    "tldraw": "^4.2.1",
     "veaury": "^2.6.3"
   }
 }

@@ -1,5 +1,5 @@
 import { writeFile, mkdir } from "node:fs/promises";
-import { dirname } from "node:path";
+import { dirname, join } from "node:path";
 import { cwd } from "node:process";
 
 export type StoreFileData = {
@@ -8,8 +8,12 @@ export type StoreFileData = {
   type: "file" | "json";
 };
 
-export async function storeFile(data: StoreFileData) {
-  const docPath = cwd() + "/public/" + decodeURIComponent(data.path);
+export async function storeFile(data: StoreFileData, publicDir: string) {
+  // Vite resolves publicDir to "" when it is disabled; keep the old location then
+  const docPath = join(
+    publicDir || join(cwd(), "public"),
+    decodeURIComponent(data.path)
+  );
   const folderPath = dirname(docPath);
   try {
     let content: Blob;

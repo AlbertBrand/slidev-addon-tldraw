@@ -45,7 +45,7 @@ import {
 } from "vue";
 import { applyPureReactInVue, applyPureVueInReact } from "veaury";
 import { useCssVar, useResizeObserver } from "@vueuse/core";
-import { useDarkMode, useSlideContext } from "@slidev/client";
+import { resolveAssetUrl, useDarkMode, useSlideContext } from "@slidev/client";
 import { useSaveSnapshot } from "./useSaveSnapshot";
 import { useIsEditable } from "./useIsEditable";
 import { useStore } from "./useStore";
@@ -93,7 +93,7 @@ const state = reactive<State>({
 const store = useStore();
 
 const fetchSnapshot = async (doc: string) => {
-  const res = await fetch("/" + doc);
+  const res = await fetch(resolveAssetUrl("/" + doc));
   const snapshot = await res.json();
   loadSnapshot(store, snapshot);
 

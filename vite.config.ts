@@ -15,7 +15,7 @@ export default defineConfig({
       configureServer(server) {
         server.ws.on("tldraw:store-file", async (data: StoreFileData) => {
           // store the file on disk
-          await storeFile(data);
+          await storeFile(data, server.config.publicDir);
           // send a message back to the client
           server.ws.send("tldraw:file-stored", { path: data.path });
         });

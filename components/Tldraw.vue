@@ -202,13 +202,13 @@ const updateZoom = () => {
 
 const wrapperKeydown = (e: KeyboardEvent) => {
   // prevent slidev from handling character keydown events when tldraw is focused
+  // allow Ctrl/Cmd-D to pass through to tldraw for duplicating shapes
   if (
     e.key.length > 0 &&
     e.code !== "Backspace" &&
     e.code !== "Delete" &&
-    !e.ctrlKey &&
-    !e.metaKey &&
-    !e.altKey
+    !e.altKey &&
+    (!e.ctrlKey && !e.metaKey || e.key.toLowerCase() === "d")
   ) {
     e.stopPropagation();
   }

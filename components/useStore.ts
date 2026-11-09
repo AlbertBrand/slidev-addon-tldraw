@@ -1,3 +1,4 @@
+import { resolveAssetUrl } from "@slidev/client";
 import { createTLStore, TLAssetStore, uniqueId } from "tldraw";
 
 // convert files to dataURLs to send them as a string
@@ -39,7 +40,7 @@ const assets: TLAssetStore = {
   },
 
   resolve(asset) {
-    return asset.props.src;
+    return asset.props.src && resolveAssetUrl(asset.props.src);
   },
 };
 
